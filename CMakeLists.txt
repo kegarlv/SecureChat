@@ -1,22 +1,15 @@
-cmake_minimum_required (VERSION 2.8.11)
+cmake_minimum_required(VERSION 3.8)
 project (SecureChat)
 set(CMAKE_CXX_STANDARD 14)
 
-option(enableTest false)
+#option(enableTest true)
 
 file(GLOB SOURCES src/*.cpp)
 file(GLOB HEADERS includes/*.h)
 
-add_executable(SecureChat ${SOURCES} ${HEADERS})
+add_executable(SecureChat ${SOURCES} ${HEADERS} src/CurrentUser.cpp src/CurrentUser.h src/Message.cpp src/Message.h src/Dialog.cpp src/Dialog.h libs/json.h libs/restclient-cpp/helpers.cc libs/restclient-cpp/restclient.cc libs/restclient-cpp/connection.cc)
 
-if(enableTest)
-   enable_testing()
-   add_subdirectory(libs/gtest-1.6.0)
-   include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
-   add_executable(testUser test/testUser.cpp)
-   target_link_libraries(testUser gtest gtest_main)
-   add_test(classUser testUser)
-endif()
-
-
-
+target_link_libraries(SecureChat -lcurl -pthread)
+#if(enableTest)
+    add_subdirectory(test)
+#endif()

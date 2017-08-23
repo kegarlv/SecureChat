@@ -1,7 +1,9 @@
 #include "gtest/gtest.h"
 
-TEST(TC1, T1) {
+TEST(classUser, classUser_getName_Test) {
+    EXPECT_EQ(1,0);
 }
 
-TEST(TC2, T1) {
+TEST(classUser, classUser_setName_Test) {
+    EXPECT_EQ(0,0);
 }

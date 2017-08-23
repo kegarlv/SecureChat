@@ -2,16 +2,17 @@
 #define USER_H
 
 #include <string>
+#include <ostream>
 
 class User {
   public:
-    User(std::string username);
-    virtual ~User() = 0;
+    User();
 
     std::string username() const;
     void setUsername(const std::string &username);
 
-  private:
+
+private:
     std::string m_username;
 };
 

@@ -1,6 +1,6 @@
-#include "../includes/User.h"
+#include "User.h"
 
-User::User(std::string username) : m_username(username) {
+User::User(){
 }
 
 std::string User::username() const {
