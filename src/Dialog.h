@@ -8,9 +8,6 @@
 #include "CurrentUser.h"
 #include "Message.h"
 
-#include "../libs/restclient-cpp/restclient.h"
-#include "../libs/restclient-cpp/helpers.h"
-
 #include "../libs/json.h"
 
 #include <QList>

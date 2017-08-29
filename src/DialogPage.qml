@@ -57,7 +57,7 @@ Page {
 
                         Label {
                             id: messageText
-                            text: {model.modelData.text; console.log("update");}
+                            text: model.modelData.text
                             color: sentByMe ? "black" : "white"
                             anchors.fill: parent
                             anchors.margins: 12
