@@ -5,6 +5,8 @@ import QtQuick.Controls 2.1
 Page {
     id: root
     property string inConversationWith
+    property int dialogId
+
     header: ToolBar {
         ToolButton {
             text: qsTr("Back")
@@ -25,50 +27,23 @@ Page {
         anchors.fill: parent
 
         ListView {
+            id: listView
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.margins: pane.leftPadding + messageField.leftPadding
             displayMarginBeginning: 40
             displayMarginEnd: 40
-            verticalLayoutDirection: ListView.BottomToTop
             spacing: 12
-            model: 10
-           /* delegate: Row {
-                readonly property bool sentByMe: index % 2 == 0
-
-                anchors.right: sentByMe ? parent.right : undefined
-                spacing: 6
-
-                Rectangle {
-                    id: avatar
-                    width: height
-                    height: parent.height
-                    color: "grey"
-                    visible: !sentByMe
-                }
-
-                Rectangle {
-                    width: 80
-                    height: 40
-                    color: sentByMe ? "lightgrey" : "steelblue"
-
-                    Label {
-                        anchors.centerIn: parent
-                        text: index
-                        color: sentByMe ? "black" : "white"
-                    }
-                }
-            }
-*/
+            model: backend.messages
             delegate: Column {
-                anchors.right: sentByMe ? parent.right : parent.left
                 spacing: 6
-                readonly property bool sentByMe: model.author !== "Me"
+                readonly property bool sentByMe: model.modelData.author !== backend.me()
+                anchors.right: sentByMe ? parent.right : undefined
 
                 Row {
                     id: messageRow
                     spacing: 6
-                    anchors.right: sentByMe ? parent.right : parent.left
+                    anchors.right: sentByMe ? parent.right : undefined
 
                     Image {
                         id: avatar
@@ -82,7 +57,7 @@ Page {
 
                         Label {
                             id: messageText
-                            text: model.message
+                            text: {model.modelData.text; console.log("update");}
                             color: sentByMe ? "black" : "white"
                             anchors.fill: parent
                             anchors.margins: 12
@@ -93,7 +68,7 @@ Page {
 
                 Label {
                     id: timestampText
-                    text: Qt.formatDateTime(model.timestamp, "d MMM hh:mm")
+                    text:  model.modelData.timestamp
                     color: "lightgrey"
                     anchors.right: sentByMe ? parent.right : undefined
                 }
@@ -120,6 +95,7 @@ Page {
                     id: sendButton
                     text: qsTr("Send")
                     enabled: messageField.length > 0
+                    onClicked: {backend.sendMessage(dialogId,messageField.text); messageField.text = "";}
                 }
             }
         }

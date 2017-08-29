@@ -1,9 +1,26 @@
 #include "gtest/gtest.h"
+#include "../src/CurrentUser.h"
 
-TEST(classUser, classUser_getName_Test) {
-    EXPECT_EQ(1,0);
+TEST(CurrentUserTest, setValidUsername) {
+    CurrentUser *user = CurrentUser::getInstance();
+    user->setUsername("kegarlv");
+    ASSERT_EQ(user->username(), "kegarlv");
 }
 
-TEST(classUser, classUser_setName_Test) {
-    EXPECT_EQ(0,0);
+TEST(CurrentUserTest, setInvalidUsername) {
+    CurrentUser *user = CurrentUser::getInstance();
+    user->setUsername("anotherUser");
+    ASSERT_NE(user->username(), "kegarlv");
+}
+
+TEST(CurrentUserTest, authorizeValidUser) {
+    CurrentUser *user = CurrentUser::getInstance();
+    user->setUsername("kegarlv");
+    ASSERT_TRUE(user->authorize());
+}
+
+TEST(CurrentUserTest, authorizeInvalidUser) {
+    CurrentUser *user = CurrentUser::getInstance();
+    user->setUsername("invalidUserName");
+    ASSERT_FALSE(user->authorize());
 }

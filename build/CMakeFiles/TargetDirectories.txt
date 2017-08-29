@@ -1,0 +1,14 @@
+/home/ivan/Projects/SecureChat/SecureChat/build/CMakeFiles/rebuild_cache.dir
+/home/ivan/Projects/SecureChat/SecureChat/build/CMakeFiles/SecureChat.dir
+/home/ivan/Projects/SecureChat/SecureChat/build/CMakeFiles/edit_cache.dir
+/home/ivan/Projects/SecureChat/SecureChat/build/CMakeFiles/SecureChat_autogen.dir
+/home/ivan/Projects/SecureChat/SecureChat/build/test/CMakeFiles/rebuild_cache.dir
+/home/ivan/Projects/SecureChat/SecureChat/build/test/CMakeFiles/testUser.dir
+/home/ivan/Projects/SecureChat/SecureChat/build/test/CMakeFiles/edit_cache.dir
+/home/ivan/Projects/SecureChat/SecureChat/build/test/CMakeFiles/testUser_autogen.dir
+/home/ivan/Projects/SecureChat/SecureChat/build/test/gtest-1.6.0/CMakeFiles/rebuild_cache.dir
+/home/ivan/Projects/SecureChat/SecureChat/build/test/gtest-1.6.0/CMakeFiles/gtest.dir
+/home/ivan/Projects/SecureChat/SecureChat/build/test/gtest-1.6.0/CMakeFiles/edit_cache.dir
+/home/ivan/Projects/SecureChat/SecureChat/build/test/gtest-1.6.0/CMakeFiles/gtest_main.dir
+/home/ivan/Projects/SecureChat/SecureChat/build/test/gtest-1.6.0/CMakeFiles/gtest_autogen.dir
+/home/ivan/Projects/SecureChat/SecureChat/build/test/gtest-1.6.0/CMakeFiles/gtest_main_autogen.dir

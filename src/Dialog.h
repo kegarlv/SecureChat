@@ -5,8 +5,6 @@
 #ifndef SECURECHAT_DIALOG_H
 #define SECURECHAT_DIALOG_H
 
-
-#include <vector>
 #include "CurrentUser.h"
 #include "Message.h"
 
@@ -15,21 +13,27 @@
 
 #include "../libs/json.h"
 
+#include <QList>
+#include <QVariant>
+#include <thread>
+#include <unistd.h>
+
 class Dialog {
 
 public:
     explicit Dialog(CurrentUser &currentUser, int dialogId);
 
-    std::vector<Message> dumpMessages();
-    void writeMessage(std::string);
+    QList<QObject*> dumpMessages();
+    void writeMessage(QString);
 
 private:
     CurrentUser &currentUser;
     int dialogId;
 
-    std::string dialogName;
-    const std::string DIALOG_URL = "https://securechat-4276e.firebaseio.com/Dialogs/";
+    QString dialogName;
+    const QString DIALOG_URL = "https://securechat-4276e.firebaseio.com/Dialogs/";
 
+    QList<QObject*> m_messages;
 
 };
 

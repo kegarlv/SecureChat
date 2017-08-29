@@ -1,53 +1,24 @@
 #include <iostream>
-#include <thread>
-#include <exception>
 
-#include "CurrentUser.h"
-#include "Message.h"
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include "Backend.h"
 
-#include "Dialog.h"
 
-#include <unistd.h>
+int main(int argc, char **argv) {
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QGuiApplication app(argc, argv);
 
-int main() {
+    Backend backend;
+    backend.setUsername("kegarlv");
+    backend.authorize();
 
-    CurrentUser *user = CurrentUser::getInstance();
-    std::cout << "Enter username: ";
-    std::string username;
-    std::cin >> username;
-    user->setUsername(username);
-    user->authorize();
-
-    int dialogId;
-    std::cout << "Enter dialogId (enter 1 for test dialog): ";
-    std::cin >> dialogId;
-    Dialog *dialog = user->createDialog(dialogId);
-
-    std::thread FetchThread([dialog] {
-        try {
-            while (1) {
-                auto messages = dialog->dumpMessages();
-                system("clear");
-
-                for (auto msg : messages) {
-                    std::cout << msg.toHuman() << std::endl;
-                }
-                sleep(1);
-            }
-        } catch (std::exception &e) {
-            std::cout << e.what();
-        }
-    });
-
-    std::string message;
-    try {
-        while (1) {
-            std::getline(std::cin, message);
-            dialog->writeMessage(message);
-        }
-    } catch (std::exception &e) {
-        std::cout << e.what();
+    QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("backend",&backend);
+    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    if(engine.rootObjects().isEmpty()) {
+        return -1;
     }
-
-    return 0;
+    return app.exec();
 }

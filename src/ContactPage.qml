@@ -1,10 +1,9 @@
 import QtQuick 2.6
+import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.1
-import QtGraphicalEffects 1.0
 
 Page {
     id: root
-
     header: ToolBar {
         ToolButton {
             text: "Settings";
@@ -29,16 +28,16 @@ Page {
         bottomMargin: 48
         rightMargin: 48
         spacing: 20
-        model: ["Albert Einstein", "Ernest Hemingway", "Hans Gude"]
+        model: backend.getContactList()
         delegate: ItemDelegate {
-            text: modelData
+            text: modelData.username
             width: listView.width - listView.leftMargin - listView.rightMargin
             height: avatar.implicitHeight
             leftPadding: avatar.implicitWidth + 32
-            onClicked: root.StackView.view.push("qrc:/DialogPage.qml", { inConversationWith: modelData })
+            onClicked: root.StackView.view.push("qrc:/DialogPage.qml", { inConversationWith: modelData.dialogId, dialogId : modelData.dialogId})
             Image {
                 id: avatar
-                source: "qrc:/" + modelData + ".png"
+                source: "qrc:/" + modelData.username + ".png"
             }
         }
     }

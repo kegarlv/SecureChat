@@ -3,10 +3,10 @@
 User::User(){
 }
 
-std::string User::username() const {
+QString User::username() const {
     return m_username;
 }
 
-void User::setUsername(const std::string &username) {
+void User::setUsername(const QString &username) {
     m_username = username;
 }

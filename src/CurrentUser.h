@@ -5,7 +5,12 @@
 #ifndef SECURECHAT_CURRENTUSER_H
 #define SECURECHAT_CURRENTUSER_H
 
+#include <vector>
 #include "User.h"
+#include "../libs/json.h"
+
+#include <QList>
+
 class Dialog;
 
 class CurrentUser : public User {
@@ -20,13 +25,12 @@ public:
      * @return user authorized
      */
     bool authorize();
+    Dialog getDialog(int dialogId);
 
-    Dialog* createDialog(int num);
+    QList<QObject*> getContactList();
 
 private:
     Dialog *dialog;
-
-
 };
 
 
