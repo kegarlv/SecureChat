@@ -12,10 +12,7 @@ class User : public QObject {
   public:
     User();
     User(const User &other);
-    User &operator=(const User &other) {
-        this->m_username = other.m_username;
-        return *this;
-    }
+    User &operator=(const User &other);
 
     QString username() const;
     void setUsername(const QString &username);

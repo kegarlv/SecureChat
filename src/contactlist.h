@@ -4,14 +4,15 @@
 #include <QAbstractListModel>
 #include <QList>
 #include <QModelIndex>
-
+#include <QDebug>
 #include "ContactInfo.h"
 
 class ContactModel : public QAbstractListModel {
 public:
 
     enum MyRoles {
-        DialogId = Qt::UserRole + 1
+        DialogId = Qt::UserRole + 1,
+        Username
     };
 
     ContactModel(QList<ContactInfo> contactList = QList<ContactInfo>());
@@ -24,11 +25,7 @@ public:
 
     void add(const ContactInfo &contactInfo);
 
-    virtual QHash<int, QByteArray> roleNames() const override {
-        QHash<int, QByteArray> roles;
-        roles[DialogId] = "dialogId";
-        return roles;
-    }
+    virtual QHash<int, QByteArray> roleNames() const override;
 
 private:
     QList<ContactInfo> m_contactList;

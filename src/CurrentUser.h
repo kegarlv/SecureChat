@@ -29,10 +29,11 @@ public:
     bool authorize();
     Dialog getDialog(int dialogId);
 
-    ContactModel getContactList();
+    ContactModel *getContactList();
 
 private:
     Dialog *dialog;
+    ContactModel *m_contactModel;
 };
 
 

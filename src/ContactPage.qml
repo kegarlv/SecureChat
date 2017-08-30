@@ -32,11 +32,11 @@ Page {
         spacing: 20
         model: backend.getContactList()
         delegate: ItemDelegate {
-            text: dialogId
+            text: username
             width: listView.width - listView.leftMargin - listView.rightMargin
             height: avatar.implicitHeight
             leftPadding: avatar.implicitWidth + 32
-            onClicked: root.StackView.view.push("qrc:/DialogPage.qml", { inConversationWith: modelData.dialogId, dialogId : modelData.dialogId})
+            onClicked: root.StackView.view.push("qrc:/DialogPage.qml", { inConversationWith: username, dialogId : dialogId})
             Image {
                 id: avatar
                 source: "qrc:/" + "WhiteSatan" + ".png"

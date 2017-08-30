@@ -21,6 +21,7 @@ CurrentUser *CurrentUser::getInstance() {
 }
 
 CurrentUser::CurrentUser() {
+    m_contactModel = new ContactModel;
 }
 
 CurrentUser::~CurrentUser() {
@@ -38,17 +39,16 @@ Dialog CurrentUser::getDialog(int dialogId) {
     return Dialog(dialogId);
 }
 
-ContactModel CurrentUser::getContactList() {
+ContactModel* CurrentUser::getContactList() {
     QString response = Request::get(USER_URL + m_username + "/contactList.json");
 
     Json json = Json::parse(response.toStdString());
-    ContactModel result((QList<ContactInfo>()));
     for (auto &x : json) {
         ContactInfo contactInfo;
         contactInfo.setUsername(QString::fromStdString(x["name"]));
         contactInfo.setDialogId((x["dialogId"]));
-        result.add(contactInfo);
+        m_contactModel->add(contactInfo);
     }
 
-    return result;
+    return m_contactModel;
 }

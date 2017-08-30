@@ -10,10 +10,12 @@ ContactInfo::ContactInfo() {
 
 ContactInfo::ContactInfo(const ContactInfo &other) {
     this->m_dialogId = other.m_dialogId;
+    this->m_username = other.m_username;
 }
 
 ContactInfo &ContactInfo::operator=(const ContactInfo &other) {
     this->m_dialogId = other.m_dialogId;
+    this->m_username = other.m_username;
     return *this;
 }
 

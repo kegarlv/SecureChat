@@ -27,14 +27,7 @@ void Backend::sendMessage(int dialogId, const QString &text) {
 
 ContactModel* Backend::getContactList()
 {
-    //TODO
-//    return currentUser->getContactList();
-    ContactModel* model = new ContactModel();
-    ContactInfo cInfo;
-    cInfo.setDialogId(1);
-    cInfo.setUsername("WhiteSatan");
-    model->add(cInfo);
-    return model;
+    return currentUser->getContactList();
 }
 
 Backend::~Backend() {
