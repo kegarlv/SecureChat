@@ -11,13 +11,17 @@ class User : public QObject {
     Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY usernameChanged)
   public:
     User();
+    User(const User &other);
+    User &operator=(const User &other) {
+        this->m_username = other.m_username;
+        return *this;
+    }
 
     QString username() const;
     void setUsername(const QString &username);
 
   signals:
     void usernameChanged();
-
 
 protected:
     QString m_username;

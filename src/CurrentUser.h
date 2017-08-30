@@ -9,6 +9,8 @@
 #include "User.h"
 #include "../libs/json.h"
 
+#include "contactlist.h"
+
 #include <QList>
 
 class Dialog;
@@ -27,7 +29,7 @@ public:
     bool authorize();
     Dialog getDialog(int dialogId);
 
-    QList<QObject*> getContactList();
+    ContactModel getContactList();
 
 private:
     Dialog *dialog;

@@ -35,19 +35,19 @@ bool CurrentUser::authorize() {
 }
 
 Dialog CurrentUser::getDialog(int dialogId) {
-    return Dialog(*this, dialogId);
+    return Dialog(dialogId);
 }
 
-QList<QObject *> CurrentUser::getContactList() {
+ContactModel CurrentUser::getContactList() {
     QString response = Request::get(USER_URL + m_username + "/contactList.json");
 
     Json json = Json::parse(response.toStdString());
-    QList<QObject *> result;
+    ContactModel result((QList<ContactInfo>()));
     for (auto &x : json) {
-        ContactInfo *contactInfo = new ContactInfo;
-        contactInfo->setUsername(QString::fromStdString(x["name"]));
-        contactInfo->setDialogId((x["dialogId"]));
-        result.append(contactInfo);
+        ContactInfo contactInfo;
+        contactInfo.setUsername(QString::fromStdString(x["name"]));
+        contactInfo.setDialogId((x["dialogId"]));
+        result.add(contactInfo);
     }
 
     return result;

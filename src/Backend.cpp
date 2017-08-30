@@ -2,20 +2,18 @@
 // Created by ivan on 23.08.17.
 //
 
-#include <iostream>
 #include "Backend.h"
+#include <iostream>
 
 Backend::Backend() {
     currentUser = CurrentUser::getInstance();
-
 }
 
 void Backend::setUsername(const QString &username) {
     currentUser->setUsername(username);
-
 }
 
-QString Backend::username() {
+QString Backend::getUsername() {
     return currentUser->username();
 }
 
@@ -27,20 +25,22 @@ void Backend::sendMessage(int dialogId, const QString &text) {
     currentUser->getDialog(dialogId).writeMessage(text);
 }
 
+ContactModel* Backend::getContactList()
+{
+    //TODO
+//    return currentUser->getContactList();
+    ContactModel* model = new ContactModel();
+    ContactInfo cInfo;
+    cInfo.setDialogId(1);
+    cInfo.setUsername("WhiteSatan");
+    model->add(cInfo);
+    return model;
+}
+
 Backend::~Backend() {
-
 }
 
-QList<QObject *> Backend::getContactList() {
-    return currentUser->getContactList();
-}
-
-QList<QObject *> Backend::getMessages() {
+MessageList Backend::getMessages() {
     qDebug() << "Get Messages";
-    return currentUser->getDialog(1).dumpMessages();
-}
-
-QList<QObject *> Backend::getMsg() {
-    qDebug() << "Get msg";
     return currentUser->getDialog(1).dumpMessages();
 }

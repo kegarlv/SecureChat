@@ -2,30 +2,28 @@
 // Created by ivan on 22.08.17.
 //
 
-#include <iostream>
-#include <QtCore/QDateTime>
 #include "Message.h"
+#include <QtCore/QDateTime>
 
-Message::Message(QString text, QString author): m_text(text),m_author(author),m_timestamp(time(nullptr)) {
-    std::cout << text.toStdString();
+Message::Message(QString text, QString author) : m_text(text), m_author(author), m_timestamp(time(nullptr)) {
 }
 
 QString Message::toJson() {
     return "{"
-        "\"author\":"
-           "\"" + m_author + "\"" +
+           "\"author\":"
+           "\"" +
+           m_author + "\"" +
            ",\"text\":" +
            "\"" + m_text + "\"" +
            ",\"timestamp\":" +
-           QString::number(m_timestamp,10) +
+           QString::number(m_timestamp) +
            "}";
 }
 
-
-Message::Message(QString text, QString author, time_t timestamp) : m_text(text),m_author(author),m_timestamp(timestamp) {
-  std::cout << text.toStdString();
+Message::Message(QString text, QString author, time_t timestamp) : m_text(text), m_author(author), m_timestamp(timestamp) {
 }
- QString Message::text() const {
+
+QString Message::text() const {
     return m_text;
 }
 
@@ -47,24 +45,4 @@ QString Message::timestamp() const {
 
 void Message::setTimestamp(QString timestamp) {
     m_timestamp = timestamp.toInt();
-}
-
-MessageList::~MessageList() {
-
-}
-
-MessageList::MessageList(QList<QObject*> messages, QObject *parent) : m_messages(messages), QAbstractListModel(parent) {
-
-}
-
-int MessageList::rowCount(const QModelIndex &parent) const {
-    return m_messages.size();
-}
-
-QVariant MessageList::data(const QModelIndex &index, int role) const {
-    int i = index.row();
-    if(i< 0 || i > m_messages.size()) {
-        return QVariant(QVariant::Invalid);
-    }
-    return QVariant::fromValue(m_messages[i]);
 }

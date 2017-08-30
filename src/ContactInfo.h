@@ -13,6 +13,9 @@ class ContactInfo : public User {
     Q_PROPERTY(int dialogId READ getDialogId WRITE setDialogId NOTIFY dialogIdChanged)
 public:
     ContactInfo();
+    ContactInfo(const ContactInfo &other);
+    ContactInfo &operator=(const ContactInfo &other);
+
     ~ContactInfo();
 
     int getDialogId() const;
@@ -24,17 +27,6 @@ public:
 private:
     int m_dialogId;
 
-};
-
-class ContactModel : public QAbstractListModel {
-public:
-    ContactModel(QList<QObject*> contactList);
-    int rowCount(const QModelIndex &parent) const override;
-
-    QVariant data(const QModelIndex &index, int role) const override;
-
-private:
-    QList<QObject *> m_contactList;
 };
 
 

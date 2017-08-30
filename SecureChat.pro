@@ -9,7 +9,9 @@ SOURCES += src/Backend.cpp \
            src/main.cpp \
            src/Message.cpp \
            src/User.cpp \
-    request.cpp
+    request.cpp \
+    src/messagelist.cpp \
+    src/contactlist.cpp
 
 HEADERS += src/Backend.h \
            src/ContactInfo.h \
@@ -18,7 +20,9 @@ HEADERS += src/Backend.h \
            src/Message.h \
            src/User.h \
            libs/json.h \
-    request.h
+    request.h \
+    src/messagelist.h \
+    src/contactlist.h
 
 RESOURCES += src/qml.qrc
 

@@ -14,11 +14,15 @@ int main(int argc, char **argv) {
     backend.setUsername("kegarlv");
     backend.authorize();
 
+
     QQmlApplicationEngine engine;
+    qmlRegisterType<ContactModel>("ContactModel", 1, 0, "ContactModel");
+    qmlRegisterInterface<ContactModel>("ContactModel");
     engine.rootContext()->setContextProperty("backend",&backend);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if(engine.rootObjects().isEmpty()) {
         return -1;
     }
+
     return app.exec();
 }

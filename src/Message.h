@@ -9,8 +9,7 @@
 #include <ctime>
 #include <QtCore/QObject>
 #include <QString>
-#include <QtCore/QAbstractListModel>
-#include <QList>
+
 
 class Message : public QObject {
     Q_OBJECT
@@ -55,27 +54,5 @@ public:
     time_t m_timestamp;
 
 };
-
-Q_DECLARE_METATYPE(Message*)
-
-class MessageList : public QAbstractListModel {
-    Q_OBJECT
-public:
-    explicit MessageList(QList<QObject*> messages, QObject *parent = nullptr);
-    ~MessageList();
-
-    int rowCount(const QModelIndex &parent) const override;
-
-    QVariant data(const QModelIndex &index, int role) const override;
-    MessageList &operator=(const MessageList &other) {
-        this->m_messages = other.m_messages;
-        return *this;
-    }
-
-    private:
-    QList<QObject*> m_messages;
-};
-
-Q_DECLARE_METATYPE(MessageList*)
 
 #endif //SECURECHAT_MESSAGE_H
