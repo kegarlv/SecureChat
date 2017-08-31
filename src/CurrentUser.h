@@ -22,17 +22,13 @@ public:
     static CurrentUser* getInstance();
     ~CurrentUser();
 
-    /**
-     * Authorizes user in system
-     * @return user authorized
-     */
     bool authorize();
-    Dialog getDialog(int dialogId);
+    Dialog* getDialog(int dialogId);
 
     ContactModel *getContactList();
 
 private:
-    Dialog *dialog;
+    QMap<int, Dialog*> m_dialogs;
     ContactModel *m_contactModel;
 };
 

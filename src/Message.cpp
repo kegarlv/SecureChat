@@ -23,6 +23,25 @@ QString Message::toJson() {
 Message::Message(QString text, QString author, time_t timestamp) : m_text(text), m_author(author), m_timestamp(timestamp) {
 }
 
+Message::Message(const Message &other) {
+    this->m_timestamp = other.m_timestamp;
+    this->m_author = other.m_author;
+    this->m_text = other.m_text;
+}
+
+Message &Message::operator=(const Message &other) {
+    this->m_text = other.m_text;
+    this->m_author = other.m_author;
+    this->m_timestamp = other.m_timestamp;
+    return *this;
+}
+
+bool Message::operator==(const Message &m2) {
+    if(this->timestamp() == m2.timestamp() && this->getAuthor() == m2.getAuthor() && this->text() == m2.text())
+        return true;
+    return false;
+}
+
 QString Message::text() const {
     return m_text;
 }

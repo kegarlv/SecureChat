@@ -1,31 +1,34 @@
 #ifndef MESSAGELIST_H
 #define MESSAGELIST_H
 
-#include <QtCore/QAbstractListModel>
+#include <QByteArray>
+#include <QHash>
 #include <QList>
+#include <QtCore/QAbstractListModel>
+
 #include "Message.h"
 
 class MessageList : public QAbstractListModel {
     Q_OBJECT
-public:
-    explicit MessageList(QList<Message> messages, QObject *parent = nullptr);
+  public:
+    enum MessageListRoles {
+        Timestamp = Qt::UserRole + 1,
+        Text,
+        Author
+    };
+    explicit MessageList(QList<Message> messages = QList<Message>(), QObject *parent = nullptr);
+    MessageList(const MessageList &other);
+    MessageList &operator=(const MessageList &other);
     ~MessageList();
 
-    MessageList(const MessageList &other) {
-        this->m_messages = other.m_messages;
-    }
+    void add(Message msg);
+        bool contains(const Message &msg) const;
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-
     QVariant data(const QModelIndex &index, int role) const override;
-    MessageList &operator=(const MessageList &other) {
-        this->m_messages = other.m_messages;
-        return *this;
-    }
+    QHash<int, QByteArray> roleNames() const override;
 
-    void add(Message msg);
-
-    private:
+  private:
     QList<Message> m_messages;
 };
 

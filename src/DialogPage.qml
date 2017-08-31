@@ -1,11 +1,18 @@
 import QtQuick 2.6
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.1
+import MessageList 1.0
 
 Page {
     id: root
     property string inConversationWith
     property int dialogId
+
+    Timer {
+        interval: 500; running: true; repeat: true
+        onTriggered: listView.positionViewAtEnd();
+    }
+
 
     header: ToolBar {
         ToolButton {
@@ -34,10 +41,10 @@ Page {
             displayMarginBeginning: 40
             displayMarginEnd: 40
             spacing: 12
-            model: backend.messages
+            model: backend.getMessages(dialogId)
             delegate: Column {
                 spacing: 6
-                readonly property bool sentByMe: model.modelData.author !== backend.me()
+                readonly property bool sentByMe: author !== "kegarlv"
                 anchors.right: sentByMe ? parent.right : undefined
 
                 Row {
@@ -51,13 +58,13 @@ Page {
                     }
                     Rectangle {
                         width: Math.min(messageText.implicitWidth + 24,
-                            listView.width - (!sentByMe ? avatar.width + messageRow.spacing : 0))
+                                        listView.width - (!sentByMe ? avatar.width + messageRow.spacing : 0))
                         height: messageText.implicitHeight + 24
                         color: sentByMe ? "lightgrey" : "steelblue"
 
                         Label {
                             id: messageText
-                            text: model.modelData.text
+                            text: message;
                             color: sentByMe ? "black" : "white"
                             anchors.fill: parent
                             anchors.margins: 12
@@ -68,13 +75,15 @@ Page {
 
                 Label {
                     id: timestampText
-                    text:  model.modelData.timestamp
+                    text:  timestamp
                     color: "lightgrey"
                     anchors.right: sentByMe ? parent.right : undefined
                 }
             }
 
-            ScrollBar.vertical: ScrollBar {}
+            ScrollBar.vertical: ScrollBar {
+                id:scrollBar
+            }
         }
 
         Pane {

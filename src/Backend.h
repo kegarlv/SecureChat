@@ -27,10 +27,9 @@ class Backend : public QObject {
     void setUsername(const QString &username);
     QString getUsername();
 
-    MessageList getMessages();
-    void sendMessage(int dialogId, const QString &text);
-
     Q_INVOKABLE ContactModel* getContactList();
+    Q_INVOKABLE MessageList* getMessages(int dialogId);
+    Q_INVOKABLE void sendMessage(int dialogId, const QString &text);
 
   signals:
     void messagesChanged();

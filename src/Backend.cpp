@@ -22,18 +22,16 @@ bool Backend::authorize() {
 }
 
 void Backend::sendMessage(int dialogId, const QString &text) {
-    currentUser->getDialog(dialogId).writeMessage(text);
+    currentUser->getDialog(dialogId)->writeMessage(text);
 }
 
-ContactModel* Backend::getContactList()
-{
+ContactModel *Backend::getContactList() {
     return currentUser->getContactList();
 }
 
 Backend::~Backend() {
 }
 
-MessageList Backend::getMessages() {
-    qDebug() << "Get Messages";
-    return currentUser->getDialog(1).dumpMessages();
+MessageList *Backend::getMessages(int dialogId) {
+    return currentUser->getDialog(dialogId)->dumpMessages();
 }

@@ -18,24 +18,32 @@
 #include "request.h"
 #include "messagelist.h"
 
-class Dialog {
+#include "messageworker.h"
+#include <QThread>
 
+class MessageWorker;
+class Dialog : public QObject {
+    Q_OBJECT
 public:
-    explicit Dialog(int dialogId);
+    explicit Dialog(int dialogId, CurrentUser *user);
 
-    MessageList dumpMessages();
+    MessageList *dumpMessages();
     void writeMessage(QString);
+
+    static QString DIALOG_URL;
+public slots:
+    void updateFinished();
 
 private:
     CurrentUser *currentUser;
     int m_dialogId;
 
     QString dialogName;
-    const QString DIALOG_URL = "https://securechat-4276e.firebaseio.com/Dialogs/";
 
-    MessageList m_messages;
+    MessageList* m_messages;
+    QThread *workerThread;
+    MessageWorker *worker;
 
 };
-
 
 #endif //SECURECHAT_DIALOG_H

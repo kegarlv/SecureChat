@@ -35,8 +35,8 @@ bool CurrentUser::authorize() {
     return true;
 }
 
-Dialog CurrentUser::getDialog(int dialogId) {
-    return Dialog(dialogId);
+Dialog* CurrentUser::getDialog(int dialogId) {
+    return m_dialogs.value(dialogId);
 }
 
 ContactModel* CurrentUser::getContactList() {
@@ -48,6 +48,7 @@ ContactModel* CurrentUser::getContactList() {
         contactInfo.setUsername(QString::fromStdString(x["name"]));
         contactInfo.setDialogId((x["dialogId"]));
         m_contactModel->add(contactInfo);
+        m_dialogs.insert(contactInfo.getDialogId(),new Dialog(contactInfo.getDialogId(), this));
     }
 
     return m_contactModel;

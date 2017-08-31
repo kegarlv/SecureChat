@@ -11,7 +11,8 @@ SOURCES += src/Backend.cpp \
            src/User.cpp \
     request.cpp \
     src/messagelist.cpp \
-    src/contactlist.cpp
+    src/contactlist.cpp \
+    src/messageworker.cpp
 
 HEADERS += src/Backend.h \
            src/ContactInfo.h \
@@ -22,7 +23,8 @@ HEADERS += src/Backend.h \
            libs/json.h \
     request.h \
     src/messagelist.h \
-    src/contactlist.h
+    src/contactlist.h \
+    src/messageworker.h
 
 RESOURCES += src/qml.qrc
 

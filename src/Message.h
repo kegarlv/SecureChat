@@ -19,18 +19,16 @@ class Message : public QObject {
     Q_PROPERTY(QString author READ getAuthor WRITE setAuthor NOTIFY authorChanged);
 
 public:
+    Message() {}
     Message(QString text, QString author);
     Message(QString text, QString author, time_t timestamp);
-    Message(const Message &other) {
-        this->m_timestamp = other.m_timestamp;
-        this->m_author = other.m_author;
-        this->m_text = other.m_text;
-    }
-    Message &operator=(const Message &other) {
-        this->m_text = other.m_text;
-        this->m_author = other.m_author;
-        this->m_timestamp = other.m_timestamp;
-        return *this;
+    Message(const Message &other);
+    Message &operator=(const Message &other);
+    bool operator==(const Message &m2);
+    friend bool operator==(const Message &m1, const Message &m2) {
+        if(m1.timestamp() == m2.timestamp() && m1.getAuthor() == m2.getAuthor() && m1.text() == m2.text())
+            return true;
+        return false;
     }
 
     QString toJson();
