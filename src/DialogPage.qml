@@ -9,10 +9,8 @@ Page {
     property int dialogId
 
     Timer {
-        interval: 500; running: true; repeat: true
-        onTriggered: listView.positionViewAtEnd();
+        id: timer
     }
-
 
     header: ToolBar {
         ToolButton {
@@ -42,6 +40,9 @@ Page {
             displayMarginEnd: 40
             spacing: 12
             model: backend.getMessages(dialogId)
+            onCountChanged: {
+                listView.currentIndex = count - 1
+    }
             delegate: Column {
                 spacing: 6
                 readonly property bool sentByMe: author !== "kegarlv"
