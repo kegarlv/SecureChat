@@ -20,12 +20,11 @@
 class Backend : public QObject {
     Q_OBJECT
   public:
-    Backend();
+    Backend(const QString &username);
     ~Backend();
 
     bool authorize();
-    void setUsername(const QString &username);
-    QString getUsername();
+    Q_INVOKABLE QString getUsername();
 
     Q_INVOKABLE ContactModel* getContactList();
     Q_INVOKABLE MessageList* getMessages(int dialogId);

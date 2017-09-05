@@ -13,7 +13,7 @@ class MessageWorker : public QObject
 {
     Q_OBJECT
 public:
-    MessageWorker(MessageList *messageList);
+    MessageWorker(MessageList *messageList, int m_dialogId);
 
     QVector<Message> getNewData();
 
@@ -25,6 +25,7 @@ signals:
 private:
     MessageList *m_messageList;
     QVector<Message> newData;
+    int m_dialogId;
 };
 
 #endif // MESSAGEWORKER_H

@@ -1,16 +1,18 @@
 #include <iostream>
 
-#include <QGuiApplication>
+#include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QInputDialog>
 #include "Backend.h"
 
 int main(int argc, char **argv) {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
 
-    Backend backend;
-    backend.setUsername("kegarlv");
+    QString username = QInputDialog::getText(nullptr, "Enter username","Enter username to login");
+
+    Backend backend(username);
     backend.authorize();
 
     QQmlApplicationEngine engine;

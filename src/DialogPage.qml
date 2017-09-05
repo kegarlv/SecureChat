@@ -42,10 +42,10 @@ Page {
             model: backend.getMessages(dialogId)
             onCountChanged: {
                 listView.currentIndex = count - 1
-    }
+            }
             delegate: Column {
                 spacing: 6
-                readonly property bool sentByMe: author !== "kegarlv"
+                readonly property bool sentByMe: author !== backend.getUsername();
                 anchors.right: sentByMe ? parent.right : undefined
 
                 Row {

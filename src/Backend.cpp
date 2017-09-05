@@ -5,14 +5,6 @@
 #include "Backend.h"
 #include <iostream>
 
-Backend::Backend() {
-    currentUser = CurrentUser::getInstance();
-}
-
-void Backend::setUsername(const QString &username) {
-    currentUser->setUsername(username);
-}
-
 QString Backend::getUsername() {
     return currentUser->username();
 }
@@ -29,9 +21,15 @@ ContactModel *Backend::getContactList() {
     return currentUser->getContactList();
 }
 
+Backend::Backend(const QString &username) {
+    currentUser = CurrentUser::getInstance();
+    currentUser->setUsername(username);
+}
+
 Backend::~Backend() {
 }
 
 MessageList *Backend::getMessages(int dialogId) {
+    qDebug() << dialogId;
     return currentUser->getDialog(dialogId)->dumpMessages();
 }

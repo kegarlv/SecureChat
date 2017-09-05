@@ -14,14 +14,14 @@ Dialog::Dialog(int dialogId, CurrentUser *user) : m_dialogId(dialogId), currentU
 }
 
 MessageList *Dialog::dumpMessages() {
-    QString response = Request::get(DIALOG_URL + QString::number(2, 10) + QString::fromStdString("/messages.json"));
+    QString response = Request::get(DIALOG_URL + QString::number(m_dialogId) + QString::fromStdString("/messages.json"));
     Json messages = Json::parse(response.toStdString());
     for (const auto &x : messages) {
         Message msg = Message(QString::fromStdString(x["text"]), QString::fromStdString(x["author"]), x["timestamp"]);
         m_messages->add(msg);
     }
 
-    worker = new MessageWorker(m_messages);
+    worker = new MessageWorker(m_messages, m_dialogId);
     worker->moveToThread(workerThread);
     workerThread->connect(workerThread, &QThread::started, worker, &MessageWorker::doWork);
     workerThread->start();
@@ -33,7 +33,7 @@ MessageList *Dialog::dumpMessages() {
 void Dialog::writeMessage(QString text) {
     if (!text.isEmpty()) {
         Message message(text, currentUser->username());
-        Request::post(DIALOG_URL + QString::number(2) + "/messages.json", message.toJson());
+        Request::post(DIALOG_URL + QString::number(m_dialogId) + "/messages.json", message.toJson());
     }
     return;
 }
