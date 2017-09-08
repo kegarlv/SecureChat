@@ -20,7 +20,7 @@ void MessageWorker::doWork() {
 }
 
 QVector<Message> MessageWorker::getNewData() {
-    auto tmp = newData;
+    QVector<Message> tmp = newData;
     newData.clear();
     return tmp;
 }

@@ -1,23 +1,25 @@
 #include "cipherhelper.h"
 
 QString CipherHelper::key = "7D9BB722DA2DC8674E08C3D44AAE976F";
-QString CipherHelper::iv = "37C6D22FADE22B2D924598BEE2455EFC";
 
 CipherHelper::CipherHelper() {
 }
 
-string CipherHelper::cipher(string instring) {
-    CFB_Mode<AES>::Encryption cfbEncryption((byte *)key.toStdString().c_str(), key.size(), (byte *)iv.toStdString().c_str());
-    char plainText[instring.size() + 1];
-//    bzero(plainText,instring.size() + 1);
-    cfbEncryption.ProcessData((byte *)plainText, (byte *)instring.c_str(), instring.size() + 1);
-    return plainText;
+QString CipherHelper::cipher(QString instring) {
+    std::string encrypted;
+    auto *stringSink = new StringSink(encrypted);
+    HexEncoder *hexEncoder = new HexEncoder(stringSink);
+    DefaultEncryptorWithMAC *defaultEncryptorWithMAC = new DefaultEncryptorWithMAC((byte*)key.toStdString().data(), key.size(),hexEncoder);
+    StringSource ss1(instring.toStdString(), true,defaultEncryptorWithMAC);
+    return QString::fromStdString(encrypted);
 }
 
-string CipherHelper::decipher(string instring) {
-    CFB_Mode<AES>::Decryption cfbDecryption((byte *)key.toStdString().c_str(), key.size(), (byte *)iv.toStdString().c_str());
-    char plainText[instring.size() + 1];
-    bzero(plainText,instring.size() + 1);
-    cfbDecryption.ProcessData((byte *)plainText, (byte *)instring.c_str(), instring.length() + 1);
-    return plainText;
+QString CipherHelper::decipher(QString instring) {
+    std::string decrypted;
+    auto *stringSink = new StringSink(decrypted);
+    DefaultDecryptorWithMAC *decryptorWithMAC = new DefaultDecryptorWithMAC((byte*)key.toStdString().data(), key.size(),stringSink);
+    HexDecoder *hexDecoder = new HexDecoder(decryptorWithMAC);
+
+    StringSource ss1(instring.toStdString(),true,hexDecoder);
+    return QString::fromStdString(decrypted);
 }

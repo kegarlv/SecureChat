@@ -2,6 +2,7 @@
 // Created by ivan on 22.08.17.
 //
 
+#include <iostream>
 #include "Dialog.h"
 
 #include "cipherhelper.h"
@@ -36,19 +37,15 @@ MessageList *Dialog::dumpMessages() {
 
 void Dialog::writeMessage(QString text) {
     if (!text.isEmpty()) {
-        string encrypted = CipherHelper::cipher(text.toStdString());
-        Message message(QString::fromStdString(encrypted), currentUser->username());
+        Message message(CipherHelper::cipher(text), currentUser->username());
         Request::post(DIALOG_URL + QString::number(m_dialogId) + "/messages.json", message.toJson());
     }
-    return;
 }
 
 void Dialog::updateFinished() {
     auto newData = worker->getNewData();
     for (auto &x : newData) {
-        //todo decipher message
-        string decrypted = CipherHelper::decipher(x.getText().toStdString());
-        x.setText(QString::fromStdString(decrypted));
+        x.setText(CipherHelper::decipher(x.getText()));
         m_messages->add(x);
     }
 }
