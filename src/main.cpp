@@ -1,19 +1,15 @@
-#include <iostream>
-
+#include "Backend.h"
 #include <QApplication>
+#include <QInputDialog>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <QInputDialog>
-#include "Backend.h"
 
 int main(int argc, char **argv) {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
 
-    QString username = QInputDialog::getText(nullptr, "Enter username","Enter username to login");
-
+    QString username = QInputDialog::getText(nullptr, "Enter username", "Enter username to login");
     Backend backend(username);
-    backend.authorize();
 
     QQmlApplicationEngine engine;
     qmlRegisterType<ContactModel>("ContactModel", 1, 0, "ContactModel");
@@ -22,9 +18,9 @@ int main(int argc, char **argv) {
     qmlRegisterInterface<ContactModel>("ContactModel");
     qmlRegisterInterface<MessageList>("MessageList");
 
-    engine.rootContext()->setContextProperty("backend",&backend);
+    engine.rootContext()->setContextProperty("backend", &backend);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
-    if(engine.rootObjects().isEmpty()) {
+    if (engine.rootObjects().isEmpty()) {
         return -1;
     }
 

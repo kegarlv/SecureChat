@@ -15,8 +15,8 @@
 
 #include "CurrentUser.h"
 #include "Message.h"
-#include "request.h"
 #include "messagelist.h"
+#include "request.h"
 
 #include "messageworker.h"
 #include <QThread>
@@ -24,26 +24,31 @@
 class MessageWorker;
 class Dialog : public QObject {
     Q_OBJECT
-public:
+  public:
     explicit Dialog(int dialogId, CurrentUser *user);
-
+    ~Dialog() {
+        delete worker;
+        delete workerThread;
+        delete m_messages;
+    }
     MessageList *dumpMessages();
     void writeMessage(QString);
 
     static QString DIALOG_URL;
-public slots:
+  public slots:
     void updateFinished();
 
-private:
+  private:
     CurrentUser *currentUser;
     int m_dialogId;
 
-    QString dialogName;
+    QString m_dialogName;
+    QString m_iv;
+    QString m_key;
 
-    MessageList* m_messages;
+    MessageList *m_messages;
     QThread *workerThread;
-    MessageWorker *worker;
-
+    MessageWorker *worker = nullptr;
 };
 
 #endif //SECURECHAT_DIALOG_H

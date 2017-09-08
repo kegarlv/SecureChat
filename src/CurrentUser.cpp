@@ -28,9 +28,12 @@ CurrentUser::~CurrentUser() {
 }
 
 bool CurrentUser::authorize() {
+
+
     //find privatekey
-    //cipher testmessage
-    //decipher testmessage
+        //cipher testmessage
+        //decipher testmessage
+    //or
     //return ...
     return true;
 }

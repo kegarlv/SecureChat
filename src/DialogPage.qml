@@ -18,7 +18,7 @@ Page {
             anchors.left: parent.left
             anchors.leftMargin: 10
             anchors.verticalCenter: parent.verticalCenter
-            onClicked: root.StackView.view.pop()
+            onClicked: { root.StackView.view.pop(); backend.destroyDialog(dialogId);}
         }
         Label {
             id: pageTitle
@@ -46,18 +46,19 @@ Page {
             delegate: Column {
                 spacing: 6
                 readonly property bool sentByMe: author !== backend.getUsername();
-                anchors.right: sentByMe ? parent.right : undefined
+                anchors.right: !sentByMe ? parent.right : undefined
 
                 Row {
                     id: messageRow
                     spacing: 6
-                    anchors.right: sentByMe ? parent.right : undefined
+                    anchors.right: !sentByMe ? parent.right : undefined
 
                     Image {
                         id: avatar
                         source: "qrc:/Albert Einstein.png"
                     }
                     Rectangle {
+                        id: rect
                         width: Math.min(messageText.implicitWidth + 24,
                                         listView.width - (!sentByMe ? avatar.width + messageRow.spacing : 0))
                         height: messageText.implicitHeight + 24

@@ -9,10 +9,6 @@ QString Backend::getUsername() {
     return currentUser->username();
 }
 
-bool Backend::authorize() {
-    return currentUser->authorize();
-}
-
 void Backend::sendMessage(int dialogId, const QString &text) {
     currentUser->getDialog(dialogId)->writeMessage(text);
 }
@@ -24,12 +20,12 @@ ContactModel *Backend::getContactList() {
 Backend::Backend(const QString &username) {
     currentUser = CurrentUser::getInstance();
     currentUser->setUsername(username);
+    currentUser->authorize();
 }
 
 Backend::~Backend() {
 }
 
 MessageList *Backend::getMessages(int dialogId) {
-    qDebug() << dialogId;
     return currentUser->getDialog(dialogId)->dumpMessages();
 }
