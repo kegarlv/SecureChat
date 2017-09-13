@@ -55,7 +55,7 @@ Page {
 
                     Image {
                         id: avatar
-                        source: "qrc:/Albert Einstein.png"
+                        source: "qrc:/" + dialogId.toString()
                     }
                     Rectangle {
                         id: rect

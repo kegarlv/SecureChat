@@ -9,7 +9,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
 #set(Qt5_DIR "/home/kegar/Qt/5.8/gcc_64/lib/cmake/Qt5")
-#option(enableTest true)
+option(enableTest false)
 
 file(GLOB SOURCES src/*.cpp)
 file(GLOB HEADERS includes/*.h)
@@ -17,11 +17,12 @@ file(GLOB HEADERS includes/*.h)
 find_package(Qt5 COMPONENTS Core Quick Widgets REQUIRED)
 find_package(CryptoPP REQUIRED)
 
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} request.cpp src/qml.qrc)
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} src/request.cpp src/qml.qrc)
 
 target_link_libraries(${PROJECT_NAME} -pthread ${CRYPTOPP_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Quick Qt5::Widgets Qt5::Qml)
 
 if(enableTest)
-    add_subdirectory(test)
+enable_testing(true)
+add_subdirectory(test)
 endif()

@@ -5,7 +5,7 @@
 
 #include "messagelist.h"
 #include "request.h"
-#include "libs/json.h"
+#include "../libs/json.h"
 #include <unistd.h>
 #include "Dialog.h"
 

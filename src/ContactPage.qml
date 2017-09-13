@@ -34,12 +34,14 @@ Page {
         delegate: ItemDelegate {
             text: username
             width: listView.width - listView.leftMargin - listView.rightMargin
-            height: avatar.implicitHeight
-            leftPadding: avatar.implicitWidth + 32
+            height: avatar.height
+            leftPadding: avatar.width + 32
             onClicked: root.StackView.view.push("qrc:/DialogPage.qml", { inConversationWith: username, dialogId : dialogId})
             Image {
                 id: avatar
-                source: "qrc:/" + "WhiteSatan" + ".png"
+                source: "qrc:/" + dialogId.toString() + ".png"
+                width: 48
+                height: 48
             }
         }
     }
