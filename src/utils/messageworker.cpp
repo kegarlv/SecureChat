@@ -7,7 +7,7 @@ MessageWorker::MessageWorker(MessageList *messageList, int m_dialogId) : m_messa
 
 void MessageWorker::doWork() {
     while (1) {
-        QString response = Request::get(Dialog::DIALOG_URL + QString::number(m_dialogId) + QString::fromStdString("/messages.json"));
+        QString response = Request::get(DIALOG_URL + QString::number(m_dialogId) + QString::fromStdString("/messages.json"));
         Json messages = Json::parse(response.toStdString());
         for (const auto &x : messages) {
             Message msg = Message(QString::fromStdString(x["text"]), QString::fromStdString(x["author"]), x["timestamp"]);

@@ -3,7 +3,6 @@
 //
 
 #include "Backend.h"
-#include <iostream>
 
 QString Backend::getUsername() {
     return currentUser->username();

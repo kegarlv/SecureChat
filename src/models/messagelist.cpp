@@ -1,6 +1,5 @@
 #include "messagelist.h"
 
-#include <QDebug>
 MessageList::~MessageList() {
 }
 

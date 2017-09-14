@@ -5,7 +5,7 @@
 #ifndef SECURECHAT_DIALOG_H
 #define SECURECHAT_DIALOG_H
 
-#include "../libs/json.h"
+#include "utils/json.h"
 
 #include <QList>
 #include <QVariant>
@@ -13,12 +13,14 @@
 
 #include <QDebug>
 
-#include "CurrentUser.h"
-#include "Message.h"
-#include "messagelist.h"
-#include "request.h"
+#include "src/CurrentUser.h"
+#include "structs/Message.h"
+#include "models/messagelist.h"
 
-#include "messageworker.h"
+#include "utils/request.h"
+#include "utils/messageworker.h"
+#include "utils/cipherhelper.h"
+
 #include <QThread>
 
 class MessageWorker;
@@ -26,11 +28,7 @@ class Dialog : public QObject {
     Q_OBJECT
   public:
     explicit Dialog(int dialogId, CurrentUser *user);
-    ~Dialog() {
-        delete worker;
-        delete workerThread;
-        delete m_messages;
-    }
+    ~Dialog();
     MessageList *dumpMessages();
     void writeMessage(QString);
 

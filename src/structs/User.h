@@ -1,8 +1,6 @@
 #ifndef USER_H
 #define USER_H
 
-#include <string>
-#include <ostream>
 #include <QtCore/QString>
 #include <QtCore/QObject>
 

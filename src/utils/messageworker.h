@@ -3,11 +3,10 @@
 
 #include <QObject>
 
-#include "messagelist.h"
 #include "request.h"
-#include "../libs/json.h"
-#include <unistd.h>
-#include "Dialog.h"
+#include "json.h"
+#include "constants.h"
+#include "src/models/messagelist.h"
 
 class MessageWorker : public QObject
 {
@@ -15,6 +14,7 @@ class MessageWorker : public QObject
 public:
     MessageWorker(MessageList *messageList, int m_dialogId);
 
+    //TODO add START AT
     QVector<Message> getNewData();
 
 public slots:

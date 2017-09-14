@@ -2,15 +2,11 @@
 // Created by ivan on 22.08.17.
 //
 
-#include <iostream>
 #include "Dialog.h"
-
-#include "cipherhelper.h"
-
 
 using Json = nlohmann::json;
 
-QString Dialog::DIALOG_URL = "https://securechat-4276e.firebaseio.com/Dialogs/";
+QString Dialog::DIALOG_URL = ;
 
 Dialog::Dialog(int dialogId, CurrentUser *user) : m_dialogId(dialogId), currentUser(user), QObject(nullptr) {
     m_messages = new MessageList();
@@ -22,6 +18,12 @@ Dialog::Dialog(int dialogId, CurrentUser *user) : m_dialogId(dialogId), currentU
     response = Request::get(DIALOG_URL + QString::number(m_dialogId) + QString::fromStdString("/key.json"));
     response = response.left(response.size()-1);
     m_key = response.right(response.size()-1);
+}
+
+Dialog::~Dialog() {
+    delete worker;
+    delete workerThread;
+    delete m_messages;
 }
 
 MessageList *Dialog::dumpMessages() {

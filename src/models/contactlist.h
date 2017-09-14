@@ -1,15 +1,14 @@
 #ifndef CONTACTLIST_H
 #define CONTACTLIST_H
 
+#include "src/structs/ContactInfo.h"
 #include <QAbstractListModel>
+#include <QDebug>
 #include <QList>
 #include <QModelIndex>
-#include <QDebug>
-#include "ContactInfo.h"
 
 class ContactModel : public QAbstractListModel {
-public:
-
+  public:
     enum MyRoles {
         DialogId = Qt::UserRole + 1,
         Username
@@ -27,10 +26,8 @@ public:
 
     virtual QHash<int, QByteArray> roleNames() const override;
 
-private:
+  private:
     QList<ContactInfo> m_contactList;
 };
-
-
 
 #endif // CONTACTLIST_H

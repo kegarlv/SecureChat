@@ -7,8 +7,9 @@
 
 #include "CurrentUser.h"
 #include "Dialog.h"
-#include "Message.h"
-#include "contactlist.h"
+
+#include "models/messagelist.h"
+#include "models/contactlist.h"
 
 #include <QString>
 

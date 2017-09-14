@@ -1,14 +1,14 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
-        <file>ContactPage.qml</file>
-        <file>DialogPage.qml</file>
         <file>Albert Einstein.png</file>
         <file>WhiteSatan.png</file>
         <file>Hans Gude.png</file>
-        <file>SettingsPage.qml</file>
         <file>0.png</file>
         <file>1.png</file>
         <file>3.png</file>
+        <file>ui/ContactPage.qml</file>
+        <file>ui/DialogPage.qml</file>
+        <file>ui/main.qml</file>
+        <file>ui/SettingsPage.qml</file>
     </qresource>
 </RCC>

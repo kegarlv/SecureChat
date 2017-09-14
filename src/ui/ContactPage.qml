@@ -12,7 +12,7 @@ Page {
             anchors.left: parent.left
             anchors.leftMargin: 10
             anchors.verticalCenter: parent.verticalCenter
-            onClicked: root.StackView.view.push("qrc:/SettingsPage.qml")
+            onClicked: root.StackView.view.push("qrc:/ui/SettingsPage.qml")
         }
 
         Label {
@@ -36,7 +36,7 @@ Page {
             width: listView.width - listView.leftMargin - listView.rightMargin
             height: avatar.height
             leftPadding: avatar.width + 32
-            onClicked: root.StackView.view.push("qrc:/DialogPage.qml", { inConversationWith: username, dialogId : dialogId})
+            onClicked: root.StackView.view.push("qrc:/ui/DialogPage.qml", { inConversationWith: username, dialogId : dialogId})
             Image {
                 id: avatar
                 source: "qrc:/" + dialogId.toString() + ".png"

@@ -5,7 +5,6 @@
 #include "ContactInfo.h"
 
 ContactInfo::ContactInfo() {
-
 }
 
 ContactInfo::ContactInfo(const ContactInfo &other) {
@@ -20,7 +19,6 @@ ContactInfo &ContactInfo::operator=(const ContactInfo &other) {
 }
 
 ContactInfo::~ContactInfo() {
-
 }
 
 int ContactInfo::getDialogId() const {
@@ -30,4 +28,3 @@ int ContactInfo::getDialogId() const {
 void ContactInfo::setDialogId(int m_dialogId) {
     ContactInfo::m_dialogId = m_dialogId;
 }
-

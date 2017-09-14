@@ -5,15 +5,14 @@
 #ifndef SECURECHAT_CURRENTUSER_H
 #define SECURECHAT_CURRENTUSER_H
 
-#include <vector>
-#include "User.h"
-#include "../libs/json.h"
+#include "structs/User.h"
+#include "utils/json.h"
+#include "models/contactlist.h"
+#include "Dialog.h"
 
-#include "contactlist.h"
+#include "utils/request.h"
 
 #include <QList>
-
-class Dialog;
 
 class CurrentUser : public User {
     CurrentUser();

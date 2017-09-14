@@ -2,11 +2,12 @@
 #define MESSAGELIST_H
 
 #include <QByteArray>
+#include <QDebug>
 #include <QHash>
 #include <QList>
 #include <QtCore/QAbstractListModel>
 
-#include "Message.h"
+#include "src/structs/Message.h"
 
 class MessageList : public QAbstractListModel {
     Q_OBJECT
@@ -22,7 +23,7 @@ class MessageList : public QAbstractListModel {
     ~MessageList();
 
     void add(Message msg);
-        bool contains(const Message &msg) const;
+    bool contains(const Message &msg) const;
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role) const override;

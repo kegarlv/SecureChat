@@ -3,7 +3,8 @@
 //
 
 #include "Message.h"
-#include <QtCore/QDateTime>
+
+Message::Message() {}
 
 Message::Message(QString text, QString author) : m_text(text), m_author(author), m_timestamp(time(nullptr)) {
 }
@@ -36,6 +37,12 @@ Message &Message::operator=(const Message &other) {
     return *this;
 }
 
+bool Message::operator==(const Message &m1, const Message &m2) {
+    if(m1.timestamp() == m2.timestamp() && m1.getAuthor() == m2.getAuthor() && m1.text() == m2.text())
+        return true;
+    return false;
+}
+
 bool Message::operator==(const Message &m2) {
     if(this->timestamp() == m2.timestamp() && this->getAuthor() == m2.getAuthor() && this->text() == m2.text())
         return true;
@@ -50,7 +57,7 @@ void Message::setText(const QString &text) {
     Message::m_text = text;
 }
 
-const QString &Message::getAuthor() const {
+QString Message::getAuthor() const {
     return m_author;
 }
 

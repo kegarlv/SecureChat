@@ -3,11 +3,6 @@
 //
 
 #include "CurrentUser.h"
-#include "ContactInfo.h"
-#include "Dialog.h"
-#include <iostream>
-
-#include "request.h"
 
 using Json = nlohmann::json;
 
