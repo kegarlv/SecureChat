@@ -6,13 +6,14 @@
 #include "request.h"
 #include "json.h"
 #include "constants.h"
-#include "src/models/messagelist.h"
+
+#include "src/structs/Dialog.h"
 
 class MessageWorker : public QObject
 {
     Q_OBJECT
 public:
-    MessageWorker(MessageList *messageList, int m_dialogId);
+    MessageWorker(Dialog *dialog);
 
     //TODO add START AT
     QVector<Message> getNewData();
@@ -23,9 +24,8 @@ signals:
     void updateFinished();
 
 private:
-    MessageList *m_messageList;
+    Dialog *m_dialog = nullptr;
     QVector<Message> newData;
-    int m_dialogId;
 };
 
 #endif // MESSAGEWORKER_H

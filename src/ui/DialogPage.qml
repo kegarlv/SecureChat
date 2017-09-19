@@ -1,15 +1,17 @@
 import QtQuick 2.6
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.1
+
 import MessageList 1.0
+import DialogController 1.0
 
 Page {
     id: root
     property string inConversationWith
     property int dialogId
 
-    Timer {
-        id: timer
+    DialogController {
+        id:currDialog
     }
 
     header: ToolBar {
@@ -18,7 +20,7 @@ Page {
             anchors.left: parent.left
             anchors.leftMargin: 10
             anchors.verticalCenter: parent.verticalCenter
-            onClicked: { root.StackView.view.pop(); backend.destroyDialog(dialogId);}
+            onClicked: { root.StackView.view.pop();}
         }
         Label {
             id: pageTitle
@@ -39,13 +41,13 @@ Page {
             displayMarginBeginning: 40
             displayMarginEnd: 40
             spacing: 12
-            model: backend.getMessages(dialogId)
+            model: currDialog.getMessageList()
             onCountChanged: {
                 listView.currentIndex = count - 1
             }
             delegate: Column {
                 spacing: 6
-                readonly property bool sentByMe: author !== backend.getUsername();
+                readonly property bool sentByMe: author !== "Ivan Voloshyn"
                 anchors.right: !sentByMe ? parent.right : undefined
 
                 Row {
@@ -106,7 +108,7 @@ Page {
                     id: sendButton
                     text: qsTr("Send")
                     enabled: messageField.length > 0
-                    onClicked: {backend.sendMessage(dialogId,messageField.text); messageField.text = "";}
+                    onClicked: { messageField.text = "";}
                 }
             }
         }

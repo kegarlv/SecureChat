@@ -7,16 +7,16 @@
 #include <QList>
 #include <QModelIndex>
 
-class ContactModel : public QAbstractListModel {
+class ContactList : public QAbstractListModel {
   public:
     enum MyRoles {
         DialogId = Qt::UserRole + 1,
         Username
     };
 
-    ContactModel(QList<ContactInfo> contactList = QList<ContactInfo>());
-    ContactModel(const ContactModel &other);
-    ContactModel &operator=(const ContactModel &other);
+    ContactList(QList<ContactInfo> contactList = QList<ContactInfo>());
+    ContactList(const ContactList &other);
+    ContactList &operator=(const ContactList &other);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 

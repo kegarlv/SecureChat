@@ -7,3 +7,12 @@ Dialog::Dialog(int dialogId) : m_dialogId(dialogId) {
 Dialog::~Dialog() {
     delete m_messageList;
 }
+
+MessageList *Dialog::getMessageList() {
+    return m_messageList;
+}
+
+int Dialog::getDialogId() const
+{
+    return m_dialogId;
+}

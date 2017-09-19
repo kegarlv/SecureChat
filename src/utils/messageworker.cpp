@@ -2,16 +2,16 @@
 
 using Json = nlohmann::json;
 
-MessageWorker::MessageWorker(MessageList *messageList, int m_dialogId) : m_messageList(messageList), m_dialogId(m_dialogId) {
+MessageWorker::MessageWorker(Dialog *dialog) : m_dialog(dialog){
 }
 
 void MessageWorker::doWork() {
     while (1) {
-        QString response = Request::get(DIALOG_URL + QString::number(m_dialogId) + QString::fromStdString("/messages.json"));
+        QString response = Request::get(DIALOG_URL + QString::number(m_dialog->getDialogId()) + QString::fromStdString("/messages.json"));
         Json messages = Json::parse(response.toStdString());
         for (const auto &x : messages) {
             Message msg = Message(QString::fromStdString(x["text"]), QString::fromStdString(x["author"]), x["timestamp"]);
-            if (!(newData.contains(msg) || m_messageList->contains(msg))) {
+            if (!(newData.contains(msg) || m_dialog->getMessageList()->contains(msg))) {
                 newData.push_back(msg);
             }
         }

@@ -2,7 +2,8 @@ import QtQuick 2.6
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.1
 
-import ContactModel 1.0
+import ContactList 1.0
+import DialogController 1.0
 
 Page {
     id: root
@@ -36,7 +37,7 @@ Page {
             width: listView.width - listView.leftMargin - listView.rightMargin
             height: avatar.height
             leftPadding: avatar.width + 32
-            onClicked: root.StackView.view.push("qrc:/ui/DialogPage.qml", { inConversationWith: username, dialogId : dialogId})
+            onClicked: root.StackView.view.push("qrc:/ui/DialogPage.qml", { inConversationWith: username, dialogId: dialogId})
             Image {
                 id: avatar
                 source: "qrc:/" + dialogId.toString() + ".png"

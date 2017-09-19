@@ -8,9 +8,9 @@
 #include "structs/User.h"
 #include "utils/json.h"
 #include "models/contactlist.h"
-#include "Dialog.h"
 
 #include "utils/request.h"
+#include "src/controllers/DialogController.h"
 
 #include <QList>
 
@@ -22,13 +22,13 @@ public:
     ~CurrentUser();
 
     bool authorize();
-    Dialog* getDialog(int dialogId);
 
-    ContactModel *getContactList();
+    ContactList *getContactList();
+    MessageList *getMessageList(int dialogId);
 
 private:
-    QMap<int, Dialog*> m_dialogs;
-    ContactModel *m_contactModel;
+    ContactList *m_contactModel;
+    QMap<int, DialogController*> m_dialogControllers;
 };
 
 

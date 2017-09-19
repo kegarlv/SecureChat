@@ -1,12 +1,11 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.5)
 project(Test)
 
 add_subdirectory(gtest-1.6.0)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 
-file(GLOB SOURCES ../src/*.cpp)
-file(GLOB HEADERS includes/*.h)
+file(GLOB SOURCES ../src/*/*.cpp)
 
 find_package(Qt5 COMPONENTS Core Quick Widgets REQUIRED)
 find_package(CryptoPP REQUIRED)

@@ -6,20 +6,22 @@ CipherHelper::CipherHelper() {
 }
 
 QString CipherHelper::cipher(QString instring) {
-    std::string encrypted;
-    auto *stringSink = new StringSink(encrypted);
-    HexEncoder *hexEncoder = new HexEncoder(stringSink);
-    DefaultEncryptorWithMAC *defaultEncryptorWithMAC = new DefaultEncryptorWithMAC((byte*)key.toStdString().data(), key.size(),hexEncoder);
-    StringSource ss1(instring.toStdString(), true,defaultEncryptorWithMAC);
-    return QString::fromStdString(encrypted);
+//    std::string encrypted;
+//    auto *stringSink = new StringSink(encrypted);
+//    HexEncoder *hexEncoder = new HexEncoder(stringSink);
+//    DefaultEncryptorWithMAC *defaultEncryptorWithMAC = new DefaultEncryptorWithMAC((byte*)key.toStdString().data(), key.size(),hexEncoder);
+//    StringSource ss1(instring.toStdString(), true,defaultEncryptorWithMAC);
+//    return QString::fromStdString(encrypted);
+    return instring;
 }
 
 QString CipherHelper::decipher(QString instring) {
-    std::string decrypted;
-    auto *stringSink = new StringSink(decrypted);
-    DefaultDecryptorWithMAC *decryptorWithMAC = new DefaultDecryptorWithMAC((byte*)key.toStdString().data(), key.size(),stringSink);
-    HexDecoder *hexDecoder = new HexDecoder(decryptorWithMAC);
+//    std::string decrypted;
+//    auto *stringSink = new StringSink(decrypted);
+//    DefaultDecryptorWithMAC *decryptorWithMAC = new DefaultDecryptorWithMAC((byte*)key.toStdString().data(), key.size(),stringSink);
+//    HexDecoder *hexDecoder = new HexDecoder(decryptorWithMAC);
 
-    StringSource ss1(instring.toStdString(),true,hexDecoder);
-    return QString::fromStdString(decrypted);
+//    StringSource ss1(instring.toStdString(),true,hexDecoder);
+//    return QString::fromStdString(decrypted);
+    return instring;
 }

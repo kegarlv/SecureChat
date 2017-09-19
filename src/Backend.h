@@ -5,11 +5,10 @@
 #ifndef SECURECHAT_BACKEND_H
 #define SECURECHAT_BACKEND_H
 
-#include "CurrentUser.h"
-#include "Dialog.h"
-
 #include "models/messagelist.h"
 #include "models/contactlist.h"
+
+#include "CurrentUser.h"
 
 #include <QString>
 
@@ -27,14 +26,14 @@ class Backend : public QObject {
     bool authorize();
     Q_INVOKABLE QString getUsername();
 
-    Q_INVOKABLE ContactModel* getContactList();
+    Q_INVOKABLE ContactList* getContactList();
     Q_INVOKABLE MessageList* getMessages(int dialogId);
     Q_INVOKABLE void sendMessage(int dialogId, const QString &text);
   signals:
     void messagesChanged();
 
-  private:
-    CurrentUser *currentUser;
+private:
+    CurrentUser *m_currentUser;
 };
 
 #endif //SECURECHAT_BACKEND_H

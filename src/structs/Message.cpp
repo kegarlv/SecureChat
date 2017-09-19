@@ -2,23 +2,20 @@
 // Created by ivan on 22.08.17.
 //
 
-#include "Message.h"
+#include "src/structs/Message.h"
 
 Message::Message() {}
 
 Message::Message(QString text, QString author) : m_text(text), m_author(author), m_timestamp(time(nullptr)) {
 }
 
-QString Message::toJson() {
-    return "{"
-           "\"author\":"
-           "\"" +
-           m_author + "\"" +
-           ",\"text\":" +
-           "\"" + m_text + "\"" +
-           ",\"timestamp\":" +
-           QString::number(m_timestamp) +
-           "}";
+QString Message::toJson() const {
+    QJsonObject obj;
+    obj["author"] = m_author;
+    obj["text"] = m_text;
+    obj["timestamp"] = QString::number(m_timestamp);
+    QJsonDocument doc(obj);
+    return doc.toJson();
 }
 
 Message::Message(QString text, QString author, time_t timestamp) : m_text(text), m_author(author), m_timestamp(timestamp) {
@@ -35,12 +32,6 @@ Message &Message::operator=(const Message &other) {
     this->m_author = other.m_author;
     this->m_timestamp = other.m_timestamp;
     return *this;
-}
-
-bool Message::operator==(const Message &m1, const Message &m2) {
-    if(m1.timestamp() == m2.timestamp() && m1.getAuthor() == m2.getAuthor() && m1.text() == m2.text())
-        return true;
-    return false;
 }
 
 bool Message::operator==(const Message &m2) {

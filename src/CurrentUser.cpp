@@ -16,7 +16,7 @@ CurrentUser *CurrentUser::getInstance() {
 }
 
 CurrentUser::CurrentUser() {
-    m_contactModel = new ContactModel;
+    m_contactModel = new ContactList;
 }
 
 CurrentUser::~CurrentUser() {
@@ -24,20 +24,15 @@ CurrentUser::~CurrentUser() {
 
 bool CurrentUser::authorize() {
 
-
     //find privatekey
-        //cipher testmessage
-        //decipher testmessage
+    //cipher testmessage
+    //decipher testmessage
     //or
     //return ...
     return true;
 }
 
-Dialog* CurrentUser::getDialog(int dialogId) {
-    return m_dialogs.value(dialogId);
-}
-
-ContactModel* CurrentUser::getContactList() {
+ContactList *CurrentUser::getContactList() {
     QString response = Request::get(USER_URL + m_username + "/contactList.json");
 
     Json json = Json::parse(response.toStdString());
@@ -46,8 +41,13 @@ ContactModel* CurrentUser::getContactList() {
         contactInfo.setUsername(QString::fromStdString(x["name"]));
         contactInfo.setDialogId((x["dialogId"]));
         m_contactModel->add(contactInfo);
-        m_dialogs.insert(contactInfo.getDialogId(),new Dialog(contactInfo.getDialogId(), this));
+        m_dialogControllers.insert(contactInfo.getDialogId(), new DialogController(contactInfo.getDialogId()));
     }
 
     return m_contactModel;
+}
+
+MessageList *CurrentUser::getMessageList(int dialogId) {
+    m_dialogControllers[dialogId]->startUpdating();
+    return m_dialogControllers[dialogId]->getMessageList();
 }
