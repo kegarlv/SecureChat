@@ -4,26 +4,29 @@
 #include <QObject>
 
 #include "src/structs/Dialog.h"
+#include "src/utils/cipherhelper.h"
 #include "src/utils/messageworker.h"
 #include "src/utils/request.h"
-#include "src/utils/cipherhelper.h"
 
 class DialogController : public QObject {
     Q_OBJECT
+    Q_PROPERTY(int dialogID READ getDialogID WRITE setDialogID)
   public:
     DialogController(int dialogId);
     DialogController();
     ~DialogController();
 
-   Q_INVOKABLE void startUpdating();
+    int getDialogID();
+    void setDialogID(int dialogID);
+
+    Q_INVOKABLE void startUpdating();
     void stopUpdating();
 
     Q_INVOKABLE MessageList *getMessageList();
-    void sendMessage(const Message &msg);
+    Q_INVOKABLE void sendMessage(const QString &messageText);
 
-public slots:
+  public slots:
     void updateFinished();
-
 
   private:
     Dialog *m_dialog = nullptr;

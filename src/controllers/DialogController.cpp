@@ -1,19 +1,26 @@
 #include "DialogController.h"
 
 DialogController::DialogController(int dialogId) {
-    qDebug() << "new Dialog with " << dialogId;
     m_dialog = new Dialog(dialogId);
 }
 
 DialogController::DialogController() {
-    qDebug() << "new Dialog with " << 3;
-    m_dialog = new Dialog(3);
 }
 
 DialogController::~DialogController() {
     delete m_dialog;
     delete m_workerThread;
     delete m_messageWorker;
+}
+
+int DialogController::getDialogID() {
+    return m_dialog ? m_dialog->getDialogId() : -1;
+}
+
+void DialogController::setDialogID(int dialogID)
+{
+    delete m_dialog;
+    m_dialog = new Dialog(dialogID);
 }
 
 void DialogController::startUpdating() {
@@ -33,21 +40,25 @@ void DialogController::stopUpdating() {
 }
 
 MessageList *DialogController::getMessageList() {
-    qDebug() << "GetMessageList" << m_dialog->getDialogId();
+    if(m_dialog) {
     startUpdating();
     return m_dialog->getMessageList();
+    }
+    return nullptr;
 }
 
-void DialogController::sendMessage(const Message &msg) {
+void DialogController::sendMessage(const QString &messageText)
+{
+    Message msg(messageText,"Kegarlv");
     QString requestUrl = DIALOG_URL + QString::number(m_dialog->getDialogId()) + "/messages.json";
     Request::post(requestUrl, msg.toJson());
 }
+
 
 void DialogController::updateFinished() {
     auto newData = m_messageWorker->getNewData();
     for (auto &x : newData) {
         x.setText(CipherHelper::decipher(x.getText()));
         m_dialog->getMessageList()->add(x);
-        qDebug() << x.toJson();
     }
 }

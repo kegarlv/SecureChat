@@ -1,4 +1,6 @@
-#include "Backend.h"
+//#include "Backend.h"
+#include "src/controllers/ContactController.h"
+#include "src/controllers/DialogController.h"
 #include <QApplication>
 #include <QDebug>
 #include <QInputDialog>
@@ -9,25 +11,24 @@ int main(int argc, char **argv) {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
 
-    QString username;
-    //    username = QInputDialog::getText(nullptr, "Enter username", "Enter username to login");
-    username = "Ivan Voloshyn";
-    Backend backend(username);
 
-        QQmlApplicationEngine engine;
-        qmlRegisterType<ContactList>("ContactList", 1, 0, "ContactList");
-        qmlRegisterType<MessageList>("MessageList", 1, 0, "MessageList");
-        qmlRegisterType<DialogController>("DialogController", 1, 0, "DialogController");
+    QQmlApplicationEngine engine;
+    qmlRegisterType<Message>("Message", 1, 0, "Message");
+    qmlRegisterType<ContactList>("ContactList", 1, 0, "ContactList");
+    qmlRegisterType<MessageList>("MessageList", 1, 0, "MessageList");
+    qmlRegisterType<DialogController>("DialogController", 1, 0, "DialogController");
+    qmlRegisterType<ContactController>("ContactController", 1, 0, "ContactController");
 
-        qmlRegisterInterface<ContactList>("ContactList");
-        qmlRegisterInterface<MessageList>("MessageList");
-        qmlRegisterInterface<DialogController>("DialogController");
+    qmlRegisterInterface<ContactList>("ContactList");
+    qmlRegisterInterface<MessageList>("MessageList");
+    qmlRegisterInterface<Message>("Message");
+    qmlRegisterInterface<DialogController>("DialogController");
+    qmlRegisterInterface<ContactController>("ContactController");
 
-        engine.rootContext()->setContextProperty("backend", &backend);
-        engine.load(QUrl(QStringLiteral("qrc:/ui/main.qml")));
-        if (engine.rootObjects().isEmpty()) {
-            return -1;
-        }
+    engine.load(QUrl(QStringLiteral("qrc:/ui/main.qml")));
+    if (engine.rootObjects().isEmpty()) {
+        return -1;
+    }
 
-        return app.exec();
+    return app.exec();
 }

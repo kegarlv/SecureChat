@@ -10,5 +10,6 @@
         <file>ui/DialogPage.qml</file>
         <file>ui/main.qml</file>
         <file>ui/SettingsPage.qml</file>
+        <file>ui/LoginPage.qml</file>
     </qresource>
 </RCC>

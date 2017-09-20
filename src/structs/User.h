@@ -20,7 +20,6 @@ class User : public QObject {
 
 protected:
     QString m_username;
-    const QString USER_URL = "https://securechat-4276e.firebaseio.com/Users/";
 };
 
 #endif //USER_H

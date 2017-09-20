@@ -4,6 +4,7 @@ import QtQuick.Controls 2.1
 
 import MessageList 1.0
 import DialogController 1.0
+import Message 1.0
 
 Page {
     id: root
@@ -41,7 +42,7 @@ Page {
             displayMarginBeginning: 40
             displayMarginEnd: 40
             spacing: 12
-            model: currDialog.getMessageList()
+            model: {currDialog.dialogID = root.dialogId; currDialog.getMessageList()}
             onCountChanged: {
                 listView.currentIndex = count - 1
             }
@@ -108,7 +109,7 @@ Page {
                     id: sendButton
                     text: qsTr("Send")
                     enabled: messageField.length > 0
-                    onClicked: { messageField.text = "";}
+                    onClicked: { currDialog.sendMessage(messageField.text);messageField.text = "";}
                 }
             }
         }

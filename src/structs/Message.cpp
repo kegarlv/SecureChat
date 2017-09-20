@@ -13,7 +13,7 @@ QString Message::toJson() const {
     QJsonObject obj;
     obj["author"] = m_author;
     obj["text"] = m_text;
-    obj["timestamp"] = QString::number(m_timestamp);
+    obj["timestamp"] = (long long)m_timestamp;
     QJsonDocument doc(obj);
     return doc.toJson();
 }

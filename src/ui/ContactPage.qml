@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.1
 
 import ContactList 1.0
-import DialogController 1.0
+import ContactController 1.0
 
 Page {
     id: root
@@ -23,6 +23,10 @@ Page {
         }
     }
 
+    ContactController {
+        id: contactController;
+    }
+
     ListView {
         id: listView
         anchors.fill: parent
@@ -31,7 +35,7 @@ Page {
         bottomMargin: 48
         rightMargin: 48
         spacing: 20
-        model: backend.getContactList()
+        model: contactController.getContactList()
         delegate: ItemDelegate {
             text: username
             width: listView.width - listView.leftMargin - listView.rightMargin
