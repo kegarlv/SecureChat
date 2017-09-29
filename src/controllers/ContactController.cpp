@@ -1,4 +1,5 @@
 #include "ContactController.h"
+#include "UserController.h"
 
 ContactController::ContactController() {
     m_contactList = new ContactList;

@@ -2,31 +2,43 @@ QT += qml quick network widgets
 
 CONFIG += c++14
 
-SOURCES += src/messagelist.cpp \
-    src/contactlist.cpp \
-    src/messageworker.cpp \
-    src/Backend.cpp \
-    src/ContactInfo.cpp \
-    src/CurrentUser.cpp \
-    src/Dialog.cpp \
-    src/main.cpp \
-    src/Message.cpp \
-    src/User.cpp \
-    src/request.cpp \
-    src/cipherhelper.cpp
+SOURCES += \ 
+    src/controllers/ContactController.cpp \
+    src/controllers/DialogController.cpp \
+    src/controllers/UserController.cpp \
+    \
+    src/models/contactlist.cpp \
+    src/models/messagelist.cpp \
+    \
+    src/structs/ContactInfo.cpp \
+    src/structs/Dialog.cpp \
+    src/structs/Message.cpp \
+    src/structs/User.cpp \
+    \
+    src/utils/cipherhelper.cpp \
+    src/utils/messageworker.cpp \
+    src/utils/request.cpp \
+    \
+    src/main.cpp
 
-HEADERS += src/Backend.h \
-           src/ContactInfo.h \
-           src/CurrentUser.h \
-           src/Dialog.h \
-           src/Message.h \
-           src/User.h \
-           libs/json.h \
-    src/request.h \
-    src/messagelist.h \
-    src/contactlist.h \
-    src/messageworker.h \
-    src/cipherhelper.h
+HEADERS += \ 
+    src/controllers/ContactController.h \
+    src/controllers/DialogController.h \
+    src/controllers/UserController.h \
+    \
+    src/models/contactlist.h \
+    src/models/messagelist.h \
+    \
+    src/structs/ContactInfo.h \
+    src/structs/Dialog.h \
+    src/structs/Message.h \
+    src/structs/User.h \
+    \
+    src/utils/cipherhelper.h \
+    src/utils/constants.h \
+    src/utils/json.h \
+    src/utils/messageworker.h \
+    src/utils/request.h
 
 RESOURCES += src/qml.qrc
 

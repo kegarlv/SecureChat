@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.8)
 project (SecureChat VERSION 0.1 LANGUAGES CXX)
 
 ###  CMAKE CONFIGURATION
@@ -16,7 +16,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}")
 file(GLOB SOURCES src/*/*.cpp)
 file(GLOB HEADERS src/*/*.h)
 #file(GLOB ROOT_SRC src/*.cpp)
-set(ROOT_SRC src/Backend.cpp src/main.cpp src/CurrentUser.cpp)
+set(ROOT_SRC src/main.cpp)
 
 add_executable(${PROJECT_NAME} ${ROOT_SRC} ${SOURCES} ${HEADERS} src/qml.qrc)
 target_link_libraries(${PROJECT_NAME} -pthread)
