@@ -21,8 +21,12 @@ class Dialog : public QObject {
 
     int getDialogId() const;
 
+    int getMessageCount() const;
+    void setMessageCount(int messageCount);
+
 private:
     int m_dialogId;
+    int m_messageCount = 0;
     MessageList *m_messageList = nullptr;
 };
 

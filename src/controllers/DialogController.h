@@ -3,6 +3,7 @@
 
 #include <QObject>
 
+#include "UserController.h"
 #include "src/structs/Dialog.h"
 #include "src/utils/cipherhelper.h"
 #include "src/utils/messageworker.h"
@@ -12,9 +13,9 @@ class DialogController : public QObject {
     Q_OBJECT
     Q_PROPERTY(int dialogID READ getDialogID WRITE setDialogID)
   public:
-    DialogController(int dialogId);
+    explicit DialogController(int dialogId);
     DialogController();
-    ~DialogController();
+    ~DialogController() override;
 
     int getDialogID();
     void setDialogID(int dialogID);

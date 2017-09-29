@@ -13,6 +13,7 @@ Page {
 
     DialogController {
         id:currDialog
+        dialogID: dialogId
     }
 
     header: ToolBar {

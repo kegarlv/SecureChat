@@ -19,7 +19,7 @@ class ContactController : public QObject {
     Q_OBJECT
   public:
     ContactController();
-    ~ContactController();
+    ~ContactController() override;
 
     Q_INVOKABLE ContactList *getContactList();
 
