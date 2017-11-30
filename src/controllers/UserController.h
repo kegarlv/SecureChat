@@ -19,14 +19,14 @@ public:
     Q_INVOKABLE void auth(const QString &username);
     void createNewUser(const QString &username);
 
-    QString getUsername();
+    static QString getUsername();
 
 signals:
     void authorized(bool isAuthorized);
 
 private:
-    QString m_username = "";
-    bool m_isAuthorized = false;
+    static QString m_username;
+    static bool m_isAuthorized;
 };
 
 

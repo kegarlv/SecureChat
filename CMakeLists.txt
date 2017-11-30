@@ -15,10 +15,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}")
 
 file(GLOB SOURCES src/*/*.cpp)
 file(GLOB HEADERS src/*/*.h)
-#file(GLOB ROOT_SRC src/*.cpp)
-set(ROOT_SRC src/Backend.cpp src/main.cpp src/CurrentUser.cpp)
 
-add_executable(${PROJECT_NAME} ${ROOT_SRC} ${SOURCES} ${HEADERS} src/qml.qrc)
+add_executable(${PROJECT_NAME} ${ROOT_SRC} ${SOURCES} ${HEADERS} src/qml.qrc src/main.cpp)
 target_link_libraries(${PROJECT_NAME} -pthread)
 
 ###  QT5 CONFIGURATION
@@ -35,4 +33,9 @@ target_link_libraries(${PROJECT_NAME} ${CRYPTOPP_LIBRARIES})
 enable_testing()
 add_subdirectory(test)
 
+
+SET(CPACK_GENERATOR "DEB")
+SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "Ivan Voloshyn") #required
+ 
+INCLUDE(CPack)
 

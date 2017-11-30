@@ -33,5 +33,11 @@ int main(int argc, char **argv) {
         return -1;
     }
 
+//    Firebase *fb = new Firebase("https://securechat-4276e.firebaseio.com/");
+//    fb->connect(fb, &Firebase::newEvent, [](){
+//        qDebug() << "New Event";
+//    });
+//    fb->listenForEvents();
+
     return app.exec();
 }

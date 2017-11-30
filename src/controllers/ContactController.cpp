@@ -11,7 +11,7 @@ ContactController::~ContactController() {
 
 ContactList *ContactController::getContactList() {
     //TODO fix username
-    QString response = Request::get(USER_URL + "Ivan Voloshyn" + "/contactList.json");
+    QString response = Request::get(USER_URL + UserController::getUsername() + "/dialogs.json");
 
     QJsonParseError err;
     QJsonDocument doc = QJsonDocument::fromJson(response.toUtf8(), &err);
@@ -20,8 +20,9 @@ ContactList *ContactController::getContactList() {
     qDebug() << response;
     for(auto x:obj) {
         ContactInfo contactInfo;
-        contactInfo.setUsername((x.toObject())["name"].toString(""));
-        contactInfo.setDialogId((x.toObject())["dialogId"].toInt(-1));
+//        contactInfo.setUsername((x.toObject())["name"].toString(""));
+        contactInfo.setUsername((x.toObject())["name"].toString("Test"));
+        contactInfo.setDialogId((x.toObject())["dialogId"].toInt(1));
         m_contactList->add(contactInfo);
     }
 

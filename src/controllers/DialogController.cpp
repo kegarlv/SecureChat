@@ -4,14 +4,13 @@ DialogController::DialogController(int dialogId) {
     m_dialog = new Dialog(dialogId);
 }
 
-DialogController::DialogController() = default;
+DialogController::DialogController() {
+    fb = new Firebase("https://securechat-4276e.firebaseio.com/Dialogs/1");
+    connect(fb, &Firebase::newEvent, this, &DialogController::newEvent);
+};
 
 DialogController::~DialogController() {
-    delete m_dialog;
-    //TODO
-    //Find correct way to stop updating...
-    delete m_workerThread;
-    delete m_messageWorker;
+    delete fb;
 }
 
 int DialogController::getDialogID() {
@@ -24,21 +23,12 @@ void DialogController::setDialogID(int dialogID) {
 }
 
 void DialogController::startUpdating() {
-    m_workerThread = new QThread;
-    m_messageWorker = new MessageWorker(m_dialog);
-    m_messageWorker->moveToThread(m_workerThread);
-    m_workerThread->connect(m_workerThread, &QThread::started, m_messageWorker, &MessageWorker::doWork);
-    connect(m_messageWorker, &MessageWorker::updateFinished, this, &DialogController::updateFinished);
-    m_workerThread->start();
-}
-
-void DialogController::stopUpdating() {
-    m_workerThread->exit(0);
-    delete m_workerThread;
-    delete m_messageWorker;
+    fb->listenForEvents();
+    qDebug() << "Start updating";
 }
 
 MessageList *DialogController::getMessageList() {
+    //TODO FAKITOL
     if (m_dialog != nullptr) {
         startUpdating();
     }
@@ -46,15 +36,28 @@ MessageList *DialogController::getMessageList() {
 }
 
 void DialogController::sendMessage(const QString &messageText) {
+    //TODO update username
     Message msg(messageText, "Ivan Voloshyn");
     QString requestUrl = DIALOG_URL + QString::number(m_dialog->getDialogId()) + "/messages.json";
     Request::post(requestUrl, msg.toJson());
 }
 
 void DialogController::updateFinished() {
-    auto newData = m_messageWorker->getNewData();
-    for (auto &x : newData) {
-        x.setText(CipherHelper::decipher(x.getText()));
-        m_dialog->getMessageList()->add(x);
+}
+
+void DialogController::newEvent(FirebaseEvent e) {
+    if(e.type == "put") {
+        qDebug() << "New messages";
+        //TODO parseMessage
+        QString s = ((e.data.remove(0,36)).replace(0,1,'{'));
+        s.chop(4);
+        QJsonDocument doc;
+        QJsonParseError err;
+        doc.fromJson(s.toUtf8(), &err);
+        qDebug() << err.errorString();
+        qDebug() << doc.object();
+        qDebug() << s;
+    } else {
+        qDebug() << "Keep-alive";
     }
 }

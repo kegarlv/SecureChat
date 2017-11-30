@@ -14,7 +14,7 @@ class FirebaseAPI {
 
     virtual QJsonArray getContactList(const QString &username) = 0;
     virtual void sendMessage(const int dialogId, const Message &message) = 0;
-    virtual QJsonObject getMessages(const int dialogId, const int startPosition = 0) = 0;
+    virtual QJsonObject getMessages(const int dialogId) = 0;
 
     virtual QImage getAvatar(const QString &username);
 };

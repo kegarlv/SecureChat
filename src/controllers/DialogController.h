@@ -9,6 +9,8 @@
 #include "src/utils/messageworker.h"
 #include "src/utils/request.h"
 
+#include "src/utils/Firebase.h"
+
 class DialogController : public QObject {
     Q_OBJECT
     Q_PROPERTY(int dialogID READ getDialogID WRITE setDialogID)
@@ -21,18 +23,18 @@ class DialogController : public QObject {
     void setDialogID(int dialogID);
 
     Q_INVOKABLE void startUpdating();
-    void stopUpdating();
 
     Q_INVOKABLE MessageList *getMessageList();
     Q_INVOKABLE void sendMessage(const QString &messageText);
 
   public slots:
     void updateFinished();
+    void newEvent(FirebaseEvent e);
 
   private:
     Dialog *m_dialog = nullptr;
     QThread *m_workerThread = nullptr;
-    MessageWorker *m_messageWorker = nullptr;
+    Firebase *fb;
 };
 
 #endif //DIALOG_CONTROLLER

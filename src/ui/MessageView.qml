@@ -1,13 +1,15 @@
-import QtQuick 2.6
+import QtQuick 2.0
 import QtQuick.Controls 2.1
 
-Item {
-    property alias text: messageText.text
-    property alias timestamp: timestampText.text
 
-    property alias avatar: avatar.source
+Column {
+    property alias messageText: messageText.text
     property bool sentByMe: false
+    property alias avatar: avatar.source
+    property alias  timestamp: timestampText.text
 
+    spacing: 6
+    anchors.right: !sentByMe ? parent.right : undefined
     Row {
         id: messageRow
         spacing: 6
@@ -15,7 +17,6 @@ Item {
 
         Image {
             id: avatar
-            source: "qrc:/" + dialogId.toString()
         }
         Rectangle {
             id: rect
@@ -26,7 +27,6 @@ Item {
 
             Label {
                 id: messageText
-                text: message;
                 color: sentByMe ? "black" : "white"
                 anchors.fill: parent
                 anchors.margins: 12
@@ -37,7 +37,6 @@ Item {
 
     Label {
         id: timestampText
-        text:  timestamp
         color: "lightgrey"
         anchors.right: sentByMe ? parent.right : undefined
     }

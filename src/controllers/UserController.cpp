@@ -4,6 +4,9 @@
 
 #include "UserController.h"
 
+QString UserController::m_username = "";
+bool UserController::m_isAuthorized = false;
+
 UserController::UserController() = default;
 
 UserController::~UserController() = default;

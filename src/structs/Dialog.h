@@ -28,6 +28,7 @@ private:
     int m_dialogId;
     int m_messageCount = 0;
     MessageList *m_messageList = nullptr;
+    Message m_lastMessage;
 };
 
 #endif //SECURECHAT_DIALOG_H

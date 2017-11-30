@@ -44,6 +44,10 @@ class Message : public QObject {
 
     QString timestamp() const;
     void setTimestamp(QString timestamp);
+
+    QString getMessageId() const;
+    void setMessageId(const QString &messageId);
+
   signals:
     void textChanged();
     void authorChanged();
@@ -52,6 +56,7 @@ class Message : public QObject {
     QString m_text;
     QString m_author;
     time_t m_timestamp;
+    QString m_messageId = "";
 };
 
 #endif //SECURECHAT_MESSAGE_H

@@ -63,3 +63,13 @@ QString Message::timestamp() const {
 void Message::setTimestamp(QString timestamp) {
     m_timestamp = timestamp.toInt();
 }
+
+QString Message::getMessageId() const
+{
+    return m_messageId;
+}
+
+void Message::setMessageId(const QString &messageId)
+{
+    m_messageId = messageId;
+}

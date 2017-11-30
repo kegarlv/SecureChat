@@ -6,5 +6,7 @@
         <file>ui/SettingsPage.qml</file>
         <file>ui/LoginPage.qml</file>
         <file>ui/LoginForm.ui.qml</file>
+        <file>ui/MessageView.qml</file>
+        <file>ui/MessageEditor.qml</file>
     </qresource>
 </RCC>

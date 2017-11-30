@@ -15,11 +15,9 @@ void RestFirebaseAPI::sendMessage(const int dialogId, const Message &message) {
     Request::post(requestUrl, message.toJson());
 }
 
-QJsonObject RestFirebaseAPI::getMessages(const int dialogId, const int startPosition) {
+QJsonObject RestFirebaseAPI::getMessages(const int dialogId) {
     QString requestString = DIALOG_URL + QString::number(dialogId) + QString::fromStdString("/messages.json");
-    if(startPosition) {
-        requestString += "?startAt=" + QString::number(startPosition);
-    }
+    qDebug() << requestString;
     QString response = Request::get(requestString);
     QJsonParseError err;
     QJsonDocument doc = QJsonDocument::fromJson(response.toUtf8(), &err);

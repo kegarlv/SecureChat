@@ -19,7 +19,8 @@ SOURCES += src/main.cpp \
     src/utils/request.cpp \
     src/utils/firebaseapi.cpp \
     src/utils/restfirebaseapi.cpp \
-    src/utils/cryptapi.cpp
+    src/utils/cryptapi.cpp \ 
+    src/utils/Firebase.cpp
 
 HEADERS += \
     src/controllers/ContactController.h \
@@ -38,6 +39,7 @@ HEADERS += \
     src/utils/request.h \
     src/utils/firebaseapi.h \
     src/utils/restfirebaseapi.h \
-    src/utils/cryptapi.h
+    src/utils/cryptapi.h \
+    src/utils/Firebase.h
 
 LIBS += -lcryptopp

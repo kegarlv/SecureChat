@@ -47,44 +47,12 @@ Page {
             onCountChanged: {
                 listView.currentIndex = count - 1
             }
-            delegate: Column {
-                spacing: 6
-                readonly property bool sentByMe: author !== "Ivan Voloshyn"
-                anchors.right: !sentByMe ? parent.right : undefined
-
-                Row {
-                    id: messageRow
-                    spacing: 6
-                    anchors.right: !sentByMe ? parent.right : undefined
-
-                    Image {
-                        id: avatar
-                        source: "qrc:/" + dialogId.toString()
-                    }
-                    Rectangle {
-                        id: rect
-                        width: Math.min(messageText.implicitWidth + 24,
-                                        listView.width - (!sentByMe ? avatar.width + messageRow.spacing : 0))
-                        height: messageText.implicitHeight + 24
-                        color: sentByMe ? "lightgrey" : "steelblue"
-
-                        Label {
-                            id: messageText
-                            text: message;
-                            color: sentByMe ? "black" : "white"
-                            anchors.fill: parent
-                            anchors.margins: 12
-                            wrapMode: Label.Wrap
-                        }
-                    }
-                }
-
-                Label {
-                    id: timestampText
-                    text:  timestamp
-                    color: "lightgrey"
-                    anchors.right: sentByMe ? parent.right : undefined
-                }
+            delegate: MessageView {
+                messageText: message
+                timestamp: timestamp
+                sentByMe: author !== "Ivan Voloshyn"
+                //TODO
+//                avatar: avatar
             }
 
             ScrollBar.vertical: ScrollBar {
@@ -92,27 +60,9 @@ Page {
             }
         }
 
-        Pane {
-            id: pane
-            Layout.fillWidth: true
-
-            RowLayout {
-                width: parent.width
-
-                TextArea {
-                    id: messageField
-                    Layout.fillWidth: true
-                    placeholderText: qsTr("Enter text...")
-                    wrapMode: TextArea.Wrap
-                }
-
-                Button {
-                    id: sendButton
-                    text: qsTr("Send")
-                    enabled: messageField.length > 0
-                    onClicked: { currDialog.sendMessage(messageField.text);messageField.text = "";}
-                }
-            }
+        MessageEditor {
+            id: messageEditor
+            onSendMessage: { currDialog.sendMessage(messageText);messageText = "";}
         }
     }
 }
