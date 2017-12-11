@@ -49,14 +49,12 @@ void DialogController::newEvent(FirebaseEvent e) {
     if(e.type == "put") {
         qDebug() << "New messages";
         //TODO parseMessage
-        QString s = ((e.data.remove(0,36)).replace(0,1,'{'));
-        s.chop(4);
-        QJsonDocument doc;
+        QString s = e.data;
+        s.remove(0,6);
         QJsonParseError err;
-        doc.fromJson(s.toUtf8(), &err);
-        qDebug() << err.errorString();
-        qDebug() << doc.object();
-        qDebug() << s;
+        QJsonDocument doc = QJsonDocument::fromJson(s.toUtf8(), &err);
+
+        qDebug() << doc.object().keys();
     } else {
         qDebug() << "Keep-alive";
     }
