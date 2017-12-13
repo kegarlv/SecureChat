@@ -22,7 +22,7 @@ void Firebase::newEventCaptured() {
     QNetworkReply *reply = (QNetworkReply *)sender();
     QString buffer = reply->readAll();
     FirebaseEvent e;
-    qDebug() << "Firebase::newEventCaptured buffer" << buffer;
+//    qDebug() << "Firebase::newEventCaptured buffer" << buffer;
     e.type = (buffer.left(buffer.indexOf('\n'))).remove(0,7);
     e.data = buffer.right(buffer.size() - buffer.indexOf('\n') - 1);
 

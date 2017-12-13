@@ -34,6 +34,7 @@ class Message : public QObject {
     }
 
     QString toJson() const;
+    static Message fromJson(const QJsonObject &obj);
 
     Q_INVOKABLE QString getText() { return m_text; }
     QString text() const;

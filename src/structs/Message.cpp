@@ -18,6 +18,15 @@ QString Message::toJson() const {
     return doc.toJson();
 }
 
+Message Message::fromJson(const QJsonObject &obj)
+{
+    Message msg;
+    msg.setAuthor(obj.value("author").toString());
+    msg.setText(obj.value("text").toString());
+    msg.setTimestamp(obj.value("timestamp").toString());
+    return msg;
+}
+
 Message::Message(QString text, QString author, time_t timestamp) : m_text(text), m_author(author), m_timestamp(timestamp) {
 }
 

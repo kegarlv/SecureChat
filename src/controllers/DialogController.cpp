@@ -46,15 +46,25 @@ void DialogController::updateFinished() {
 }
 
 void DialogController::newEvent(FirebaseEvent e) {
-    if(e.type == "put") {
+    if (e.type == "put") {
         qDebug() << "New messages";
         //TODO parseMessage
         QString s = e.data;
-        s.remove(0,6);
+        s.remove(0, 6);
         QJsonParseError err;
         QJsonDocument doc = QJsonDocument::fromJson(s.toUtf8(), &err);
-
-        qDebug() << doc.object().keys();
+        qDebug() << err.errorString();
+        qDebug() << s;
+        auto messages = doc.object().take("data").toObject().take("messages").toObject();
+        if(messages.isEmpty()) {
+            messages = doc.object().take("data").toObject();
+            qDebug() << messages;
+            m_dialog->getMessageList()->add(Message::fromJson(messages));
+        } else
+        for (auto msg : messages) {
+            qDebug() << msg;
+            m_dialog->getMessageList()->add(Message::fromJson(msg.toObject()));
+        }
     } else {
         qDebug() << "Keep-alive";
     }
