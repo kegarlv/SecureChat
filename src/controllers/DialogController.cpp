@@ -5,8 +5,7 @@ DialogController::DialogController(int dialogId) {
 }
 
 DialogController::DialogController() {
-    fb = new Firebase("https://securechat-4276e.firebaseio.com/Dialogs/1");
-    connect(fb, &Firebase::newEvent, this, &DialogController::newEvent);
+
 };
 
 DialogController::~DialogController() {
@@ -18,8 +17,9 @@ int DialogController::getDialogID() {
 }
 
 void DialogController::setDialogID(int dialogID) {
-    delete m_dialog;
     m_dialog = new Dialog(dialogID);
+    fb = new Firebase("https://securechat-4276e.firebaseio.com/Dialogs/" + QString::number(dialogID));
+    connect(fb, &Firebase::newEvent, this, &DialogController::newEvent);
 }
 
 void DialogController::startUpdating() {
@@ -37,12 +37,9 @@ MessageList *DialogController::getMessageList() {
 
 void DialogController::sendMessage(const QString &messageText) {
     //TODO update username
-    Message msg(messageText, "Ivan Voloshyn");
+    Message msg(messageText, UserController::getUsername());
     QString requestUrl = DIALOG_URL + QString::number(m_dialog->getDialogId()) + "/messages.json";
     Request::post(requestUrl, msg.toJson());
-}
-
-void DialogController::updateFinished() {
 }
 
 void DialogController::newEvent(FirebaseEvent e) {
@@ -58,11 +55,11 @@ void DialogController::newEvent(FirebaseEvent e) {
         auto messages = doc.object().take("data").toObject().take("messages").toObject();
         if(messages.isEmpty()) {
             messages = doc.object().take("data").toObject();
-            qDebug() << messages;
+//            qDebug() << messages;
             m_dialog->getMessageList()->add(Message::fromJson(messages));
         } else
         for (auto msg : messages) {
-            qDebug() << msg;
+//            qDebug() << msg;
             m_dialog->getMessageList()->add(Message::fromJson(msg.toObject()));
         }
     } else {

@@ -20,9 +20,8 @@ ContactList *ContactController::getContactList() {
     qDebug() << response;
     for(auto x:obj) {
         ContactInfo contactInfo;
-//        contactInfo.setUsername((x.toObject())["name"].toString(""));
-        contactInfo.setUsername((x.toObject())["name"].toString("Test"));
-        contactInfo.setDialogId((x.toObject())["dialogId"].toInt(1));
+        contactInfo.setUsername(("Test"));
+        contactInfo.setDialogId(x.toInt(1));
         m_contactList->add(contactInfo);
     }
 

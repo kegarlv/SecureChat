@@ -15,11 +15,6 @@
 
 class Message : public QObject {
     Q_OBJECT
-
-    Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
-    Q_PROPERTY(QString timestamp READ timestamp WRITE setTimestamp NOTIFY textChanged)
-    Q_PROPERTY(QString author READ getAuthor WRITE setAuthor NOTIFY authorChanged)
-
   public:
     Message();
     Message(QString text, QString author);
@@ -36,7 +31,6 @@ class Message : public QObject {
     QString toJson() const;
     static Message fromJson(const QJsonObject &obj);
 
-    Q_INVOKABLE QString getText() { return m_text; }
     QString text() const;
     void setText(const QString &text);
 

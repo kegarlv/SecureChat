@@ -1,7 +1,5 @@
 #include "messageworker.h"
 
-using Json = nlohmann::json;
-
 MessageWorker::MessageWorker(Dialog *dialog) : m_dialog(dialog) {
     m_firebaseApi = new RestFirebaseAPI();
     qDebug() << "MessageWorker created w/" << dialog->getDialogId();

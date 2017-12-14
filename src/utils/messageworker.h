@@ -4,7 +4,6 @@
 #include <QObject>
 
 #include "request.h"
-#include "json.h"
 #include "constants.h"
 
 #include "src/structs/Dialog.h"

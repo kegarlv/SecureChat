@@ -31,6 +31,8 @@ QVariant MessageList::data(const QModelIndex &index, int role) const {
         return m_messages[i].getAuthor();
     case Timestamp:
         return m_messages[i].timestamp();
+    case MessageList::SBM:
+        return m_messages[i].getAuthor() != UserController::getUsername();
     }
 }
 
@@ -39,6 +41,7 @@ QHash<int, QByteArray> MessageList::roleNames() const {
     roles[Timestamp] = "timestamp";
     roles[Text] = "message";
     roles[Author] = "author";
+    roles[SBM] = "sbm";
     return roles;
 }
 

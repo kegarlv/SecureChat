@@ -50,7 +50,7 @@ Page {
             delegate: MessageView {
                 messageText: message
                 timestamp: timestamp
-                sentByMe: author !== "Ivan Voloshyn"
+                sentByMe: sbm
                 //TODO
 //                avatar: avatar
             }

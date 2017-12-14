@@ -28,7 +28,6 @@ class DialogController : public QObject {
     Q_INVOKABLE void sendMessage(const QString &messageText);
 
   public slots:
-    void updateFinished();
     void newEvent(FirebaseEvent e);
 
   private:

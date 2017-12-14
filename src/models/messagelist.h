@@ -9,13 +9,16 @@
 
 #include "src/structs/Message.h"
 
+#include "src/controllers/UserController.h"
+
 class MessageList : public QAbstractListModel {
     Q_OBJECT
   public:
     enum MessageListRoles {
         Timestamp = Qt::UserRole + 1,
         Text,
-        Author
+        Author,
+        SBM,
     };
     explicit MessageList(QList<Message> messages = QList<Message>(), QObject *parent = nullptr);
     MessageList(const MessageList &other);

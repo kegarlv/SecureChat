@@ -30,7 +30,7 @@ ApplicationWindow {
     LoginForm {
         id: loginForm
         onLoginClicked: {
-            console.log("Logged in" + loginForm.username);
+            console.log("Logged in " + loginForm.username);
             loginForm.visible = false;
             spinner.visible = true;
             //TODO add password

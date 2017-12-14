@@ -34,7 +34,7 @@ HEADERS += \
     src/structs/User.h \
     src/utils/cipherhelper.h \
     src/utils/constants.h \
-    src/utils/json.h \
+#    src/utils/json.h \
     src/utils/messageworker.h \
     src/utils/request.h \
     src/utils/firebaseapi.h \
